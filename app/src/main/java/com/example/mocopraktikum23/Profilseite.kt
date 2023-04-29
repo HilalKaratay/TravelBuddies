@@ -68,11 +68,11 @@ fun TravelBuddiesLeiste(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun PersonenDaten(name: String,modifier: Modifier){
-     Box(modifier = ) {
+    /*Box(modifier = ) {
         
     }
     
-    
+    */
 }
 
 @Preview(showBackground = true)
