@@ -57,7 +57,7 @@ fun TravelBuddiesMapLeiste(name: String, modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = "Profil",
+            text = "Map",
             fontSize = 29.sp,
             modifier = Modifier
                 .padding(
