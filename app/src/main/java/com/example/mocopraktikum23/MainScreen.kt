@@ -1,9 +1,14 @@
 package com.example.mocopraktikum23.Screens
 
+import android.widget.Toolbar
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -17,10 +22,25 @@ import com.example.mocopraktikum23.NavigationBarScreen
 fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { BottomBar(navController = navController) }
+        //scaffoldState = scaffoldState,
+        topBar = { Toolbar() },
+        bottomBar = { BottomBar(navController = navController)}
     ) { BottomNavGraph(navController = navController)}
 }
 
+
+
+@Composable
+fun Toolbar(){
+            TopAppBar(
+                // elevation = 4.dp,
+                title = {
+                    Text(text = "Travelbuddies",
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.Cursive,
+                    )
+                })
+        } //Das könnte man noch ausarbeiten. Hinzufügen des NAMENS der aktuellen seite
 
 
 @Composable
