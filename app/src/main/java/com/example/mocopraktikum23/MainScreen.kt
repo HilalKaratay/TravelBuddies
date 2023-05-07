@@ -67,6 +67,7 @@ fun BottomBar(navController: NavHostController) {
         NavigationBarScreen.Map,
         NavigationBarScreen.Menu,
         NavigationBarScreen.Profil,
+        NavigationBarScreen.Profilerstellen
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

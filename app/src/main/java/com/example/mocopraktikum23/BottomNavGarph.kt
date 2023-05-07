@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.merveversuch10000.ui.theme.ProfilErstellen
 import com.example.mocopraktikum23.Screens.MenuScreen
 import com.example.mocopraktikum23.Screens.ProfilScreen
 
@@ -22,6 +23,9 @@ fun BottomNavGraph(navController: NavHostController){
         }
         composable(route =NavigationBarScreen.Menu.route){
             MenuScreen()
+        }
+        composable(route =NavigationBarScreen.Profilerstellen.route){
+            ProfilErstellen()
         }
 
     }

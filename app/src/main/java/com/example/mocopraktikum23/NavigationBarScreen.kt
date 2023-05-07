@@ -25,6 +25,11 @@ sealed class NavigationBarScreen(var route: String, var icon: ImageVector, var n
             route = "Map",
             icon = Icons.Default.Home,
     )
+    object Profilerstellen: NavigationBarScreen(
+        name = "Erstellen",
+        route = "Profilerstellen",
+        icon = Icons.Default.Person,
+    )
 
 
 }
