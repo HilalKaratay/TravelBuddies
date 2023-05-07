@@ -32,45 +32,74 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.ui.draw.clip
 import org.w3c.dom.Text
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.graphics.RectangleShape
+import com.example.mocopraktikum23.Screens.Buttons
 
 
 @Composable
-fun MapScreen(){
-    Column(modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
+fun MapScreen() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+       // verticalArrangement = Arrangement.Bottom,
     ) {
         //Box(modifier = Modifier)
-        //Map()
-        Leiste(heading = "In deiner Nähe:")
-        Daten(name = "  Lisa,", alter = "25", standort = "Gummersbach", reiseziel = "Mallorca", onClick = {"clicked"})
-        Daten(name = "  Mara,", alter = "21", standort = "Windhagen", reiseziel = "     Madrid", onClick = {"clicked"})
-        Daten(name = "  Antonio,", alter = "28", standort = "Siegen", reiseziel = "        London", onClick = {"clicked"})
-        Daten(name = "  Sarah,", alter = "25", standort = "Overath", reiseziel = "          Istanbul", onClick = {"clicked"})
+        Map()
+        Leiste()
+        Daten(
+            name = "  Lisa,",
+            alter = "25",
+            standort = "Gummersbach",
+            reiseziel = "Mallorca",
+            onClick = { "clicked" })
+        Daten(
+            name = "  Mara,",
+            alter = "21",
+            standort = "Windhagen",
+            reiseziel = "     Madrid",
+            onClick = { "clicked" })
+        Daten(
+            name = "  Antonio,",
+            alter = "28",
+            standort = "Siegen",
+            reiseziel = "        London",
+            onClick = { "clicked" })
+        Daten(
+            name = "  Sarah,",
+            alter = "25",
+            standort = "Overath",
+            reiseziel = "          Istanbul",
+            onClick = { "clicked" })
     }
 }
+
 @Composable
 fun Map(){
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 20.dp)
+            .padding(vertical = 80.dp)
+
+           /* .fillMaxWidth()
             .fillMaxHeight()
             .padding(vertical = 320.dp)
             .padding(horizontal = 40.dp)
             .padding(top = 1.dp)
             .border(width = 5.dp, color = Color.LightGray)
-            .padding(20.dp),
-        contentAlignment = Alignment.Center
+            .padding(20.dp),*/
+       // contentAlignment = Alignment.Center
     ) {
         Image(
             painterResource(id = R.drawable.gicon),
             contentDescription = "Map-Inhalt",
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxWidth()
+                .border(6.dp, shape = RectangleShape, color = Color.LightGray)
         )
         //Text(text = "Map-Inhalt")
     }
 }
 @Composable
-fun Leiste(heading:String){
+fun Leiste(){
 
     val letterSpacing= 0.5.sp
     val lineHeight = 25.sp
@@ -82,7 +111,7 @@ fun Leiste(heading:String){
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = heading,
+            text = "In deiner Nähe:",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 10.dp),
@@ -97,21 +126,26 @@ fun Daten(
     reiseziel: String,
     onClick: () -> Unit
 ){
-    val letterSpacing= 0.5.sp
-    val lineHeight = 20.sp
+    val width= 60.dp
+    val height = 40.dp
 
     if (name.isNotBlank() && alter.isNotBlank() && standort.isNotBlank() && reiseziel.isNotBlank())
     {
     Column(modifier = Modifier
         .clickable(onClick = onClick)
         .fillMaxWidth()
-        .padding(horizontal = 20.dp)
-        .padding(vertical = 1.dp)
+        //.padding(horizontal =10.dp)
+        .padding(vertical = 2.dp)
         .padding(20.dp)
-        .clip(CircleShape)
-        .background(Color.LightGray),
     ){
-        Text(text =  "$name $alter $standort               $reiseziel")
+        Text(text = " $name $alter $standort               $reiseziel  ",
+            modifier = Modifier
+            .defaultMinSize(minWidth = (width))
+            .height(height)
+                    .clip(CircleShape)
+                    .background(Color.LightGray)
+                    .padding(6.dp)
+        )
         }
     }
 }
@@ -121,5 +155,5 @@ fun MapScreenPreview(){
     MapScreen()
     //Leiste(heading = "")
     //Daten(name = "", alter = "", standort = "", reiseziel = "", onClick = {""})
-    Map()
+
 }

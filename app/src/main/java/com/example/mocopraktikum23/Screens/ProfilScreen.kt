@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mocopraktikum23.R
@@ -39,13 +41,13 @@ fun ProfilScreen() {
     Column(
         modifier = Modifier.fillMaxSize()){
 //hier die Composables die angezeigt werden in stücken
+        ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
         ProfilSection()
         ButtonLeiste(modifier = Modifier
             .fillMaxWidth()
             .padding(15.dp))
         ReiseInformation(reisezieleÜberschrift = "Lisa´s Reiseziele","#Istanbul","       #London","           #Hamburg")
         ReiseTimeline(vergangeneReiseliste = "Lisa´s Reise Timeline","Amsterdam 2019","       Köln 2020","            Mailand 2023" )
-
         PostSection()
     }
 }
@@ -70,6 +72,28 @@ fun  ProfilSection(modifier: Modifier= Modifier){
         
     }
 }
+
+@Composable
+fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(10.dp)) {
+        Image(painter = image, contentDescription =null, modifier= modifier
+            /*.border(
+                width = 1.dp,
+                color = Color.Black,
+                shape = CircleShape
+            )*/
+            .size(20.dp)
+
+
+            )
+
+    }
+
+
+}
+
 
 
 @Composable
@@ -122,7 +146,6 @@ modifier: Modifier
             fontWeight = FontWeight.Bold,
             letterSpacing = letterSpacing,
             lineHeight= lineHeight)
-
     }
 }
 
@@ -130,10 +153,9 @@ modifier: Modifier
 fun ButtonLeiste(modifier: Modifier =Modifier){
     val width= 60.dp
     val height = 30.dp
-    Row (
+    Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
-        modifier = modifier
-            ){
+        modifier = modifier){
         Buttons(text = "  Nachricht  ", modifier = Modifier
             .defaultMinSize(minWidth = width)
             .height(height))
@@ -304,4 +326,11 @@ fun PostSection(
             )
         }
     }
+}
+
+
+@Preview
+@Composable
+fun ProfilScreenPreview(){
+    ProfilScreen()
 }
