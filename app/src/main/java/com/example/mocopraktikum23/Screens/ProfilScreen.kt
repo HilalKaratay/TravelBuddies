@@ -2,13 +2,15 @@ package com.example.mocopraktikum23.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -38,23 +41,42 @@ import com.example.mocopraktikum23.R
 
 @Composable
 fun ProfilScreen() {
+    val scrollState = rememberScrollState()
     Column(
-        modifier = Modifier.fillMaxSize()){
+        modifier = Modifier
+            .fillMaxSize()
+            .scrollable(state = scrollState, Orientation.Vertical)) {
+
+
 //hier die Composables die angezeigt werden in stücken
-        ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
-        ProfilSection()
-        ButtonLeiste(modifier = Modifier
-            .fillMaxWidth()
-            .padding(15.dp))
-        ReiseInformation(reisezieleÜberschrift = "Lisa´s Reiseziele","#Istanbul","       #London","           #Hamburg")
-        ReiseTimeline(vergangeneReiseliste = "Lisa´s Reise Timeline","Amsterdam 2019","       Köln 2020","            Mailand 2023" )
-        PostSection()
-    }
+            ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
+            ProfilSection()
+            ButtonLeiste(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp)
+            )
+            ReiseInformation(
+                reisezieleuberschrift =  "Lisa´s Reiseziele",
+                "#Istanbul",
+                "       #London",
+                "           #Hamburg"
+            )
+            ReiseTimeline(
+                vergangeneReiseliste = "Lisa´s Reise Timeline",
+                "Amsterdam 2019",
+                "       Köln 2020",
+                "            Mailand 2023"
+            )
+            PostSection()
+        }
+
 }
 
 @Composable
 fun  ProfilSection(modifier: Modifier= Modifier){
-    Column(modifier = modifier.fillMaxWidth()) {
+
+    Column(modifier = modifier.fillMaxWidth()){
 
         Row(verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -188,9 +210,10 @@ fun Buttons( modifier: Modifier=Modifier,
 }
 
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da eventuell unterschiedliche Anzahl an reisezielen gibt
-    reisezieleÜberschrift: String,
+    reisezieleuberschrift: String,
     reiseziel1: String? = null,
     reiseziel2: String? = null,
     reiseziel3: String? = null,
@@ -198,12 +221,13 @@ fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da e
 ){
     val letterSpacing= 0.5.sp
     val lineHeight = 25.sp
+    val item = listOf<String>("Portugal","Türkei","Deutschland")
 
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(horizontal = 20.dp)
     ){
-        Text(text = reisezieleÜberschrift,
+        Text(text = reisezieleuberschrift,
             fontWeight = FontWeight.Bold,
             color =Color.Black,
             fontSize = 19.sp,
@@ -239,6 +263,10 @@ fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da e
         }
     }
 }
+
+
+
+
 
 
 @Composable

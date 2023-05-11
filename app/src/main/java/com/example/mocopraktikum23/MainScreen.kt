@@ -1,22 +1,12 @@
 package com.example.mocopraktikum23.Screens
 
-import android.text.style.BackgroundColorSpan
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,11 +25,18 @@ fun MainScreen() {
     Scaffold(
         //scaffoldState = scaffoldState,
         topBar = { Toolbar() },
-        bottomBar = { BottomBar(navController = navController)}
-    ) { BottomNavGraph(navController = navController)}
+        bottomBar = { BottomBar(navController = navController)},
+        )
+
+    { innerPadding ->
+        BottomNavGraph(
+            navController = navController,
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
+
+
 }
-
-
 
 @Composable
 fun Toolbar() {
@@ -61,7 +58,7 @@ fun Toolbar() {
 
 
 @Composable
-fun BottomBar(navController: NavHostController) {
+fun BottomBar(navController: NavHostController ) {
 
     val screens = listOf(
         NavigationBarScreen.Map,
