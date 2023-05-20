@@ -28,10 +28,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.ListItem
 import androidx.compose.ui.graphics.RectangleShape
+import com.example.mocopraktikum23.screens.map.MapViewModel
 
 
 @Composable
-fun MapScreen() {
+fun MapScreen(
+    mapViewModel: MapViewModel
+) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier.fillMaxSize()
@@ -166,7 +169,7 @@ fun Daten(
         }
     }
 }
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun MapScreenPreview(){
     MapScreen()
@@ -174,3 +177,4 @@ fun MapScreenPreview(){
     //Daten(name = "", alter = "", standort = "", reiseziel = "", onClick = {""})
 
 }
+*/

@@ -1,4 +1,4 @@
-package com.example.mocopraktikum23.Screens
+package com.example.mocopraktikum23.screens.map
 
 import androidx.lifecycle.ViewModel
 
