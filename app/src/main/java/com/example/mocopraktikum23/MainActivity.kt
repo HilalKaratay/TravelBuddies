@@ -15,9 +15,13 @@ import androidx.compose.ui.unit.dp
 //import com.example.merveversuch10000.ui.theme.profil
 import com.example.mocopraktikum23.Screens.MainScreen
 import com.example.mocopraktikum23.ui.theme.MocoPraktikum23Theme
+import com.google.firebase.BuildConfig
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -28,7 +32,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                    MainScreen()
-
 
 
                 }

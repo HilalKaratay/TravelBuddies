@@ -17,11 +17,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,8 +47,7 @@ fun ProfilScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .scrollable(state = scrollState, Orientation.Vertical)) {
-
+            .verticalScroll(rememberScrollState())) {
 
 //hier die Composables die angezeigt werden in stücken
             ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
@@ -76,7 +77,9 @@ fun ProfilScreen() {
 @Composable
 fun  ProfilSection(modifier: Modifier= Modifier){
 
-    Column(modifier = modifier.fillMaxWidth()){
+
+    Column(modifier = modifier
+        .fillMaxWidth()){
 
         Row(verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -97,7 +100,9 @@ fun  ProfilSection(modifier: Modifier= Modifier){
 
 @Composable
 fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
+    val scrollState = rememberScrollState()
     Column(modifier = Modifier
+        .scrollable(state = scrollState, orientation = Orientation.Vertical)
         .fillMaxWidth()
         .padding(10.dp)) {
         Image(painter = image, contentDescription =null, modifier= modifier
@@ -108,11 +113,8 @@ fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
             )*/
             .size(20.dp)
 
-
             )
-
     }
-
 
 }
 
@@ -120,8 +122,11 @@ fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
 
 @Composable
 fun ProfilPicture( image:Painter, modifier: Modifier = Modifier){
+    val scrollState= rememberScrollState()
+
     Image(painter =image, contentDescription = null, modifier= modifier
         .aspectRatio(1f, matchHeightConstraintsFirst = true)
+        .scrollable(state = scrollState, orientation = Orientation.Vertical)
         .border(
             width = 2.dp,
             color = Color.Black,
@@ -141,8 +146,9 @@ modifier: Modifier
 ){
     val letterSpacing= 0.5.sp
     val lineHeight = 20.sp
-
+val scrollState= rememberScrollState()
     Column(modifier = Modifier
+        .scrollable(state = scrollState, orientation = Orientation.Vertical)
         .fillMaxWidth()
         .padding(horizontal = 20.dp)
     ){
@@ -175,6 +181,8 @@ modifier: Modifier
 fun ButtonLeiste(modifier: Modifier =Modifier){
     val width= 60.dp
     val height = 30.dp
+    val scrollState= rememberScrollState()
+
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = modifier){
@@ -219,12 +227,14 @@ fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da e
     reiseziel3: String? = null,
     reiseziel4: String? = null,
 ){
+    val scrollState = rememberScrollState()
     val letterSpacing= 0.5.sp
     val lineHeight = 25.sp
     val item = listOf<String>("Portugal","Türkei","Deutschland")
 
     Column(modifier = Modifier
         .fillMaxWidth()
+        .scrollable(state = scrollState, orientation = Orientation.Vertical)
         .padding(horizontal = 20.dp)
     ){
         Text(text = reisezieleuberschrift,
@@ -279,10 +289,10 @@ fun ReiseTimeline( //sollte besser mit einer DataClass realsiert werden, da even
 ){
     val letterSpacing= 0.5.sp
     val lineHeight = 20.sp
-
+val scrollState = rememberScrollState()
     Column(modifier = Modifier
         .fillMaxWidth()
-
+        .scrollable(state = scrollState, orientation = Orientation.Vertical)
         .padding(horizontal = 20.dp, vertical = 20.dp)
     ){
         Text(text = vergangeneReiseliste,
@@ -328,6 +338,7 @@ fun PostSection(
     //posts: List<Painter>,
     modifier: Modifier = Modifier
 ) {
+    val scrollState = rememberScrollState()
     val posts = listOf(
         painterResource(id = R.drawable.mailand),
         painterResource(id = R.drawable.mailand2),
@@ -338,6 +349,7 @@ fun PostSection(
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = modifier
+            .scrollable(state = scrollState, orientation = Orientation.Vertical)
             .scale(1.01f),
     ) {
         items(posts.size) {
