@@ -1,4 +1,4 @@
-package com.example.mocopraktikum23.Screens
+package com.example.mocopraktikum23.screens
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding

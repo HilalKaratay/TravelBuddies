@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "866423650381",
+    "project_id": "moco2023datenbank",
+    "storage_bucket": "moco2023datenbank.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866423650381:android:d64eb7b6d8cd4090a20404",
+        "android_client_info": {
+          "package_name": "com.example.mocopraktikum23"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866423650381-k4go4koncuc8t6k5lfd7ihj7k4mrvr58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3xGjpPQCdHAZWB198aDLatxqPB5sNnbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "866423650381-k4go4koncuc8t6k5lfd7ihj7k4mrvr58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
