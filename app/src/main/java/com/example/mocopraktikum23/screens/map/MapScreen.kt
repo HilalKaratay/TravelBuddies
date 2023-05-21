@@ -28,12 +28,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.ListItem
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mocopraktikum23.screens.map.MapViewModel
 
 
 @Composable
 fun MapScreen(
-    mapViewModel: MapViewModel
+    mapViewModel: MapViewModel = hiltViewModel(),
 ) {
     val scrollState = rememberScrollState()
     Column(

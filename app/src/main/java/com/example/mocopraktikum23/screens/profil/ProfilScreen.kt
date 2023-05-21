@@ -1,5 +1,6 @@
 package com.example.mocopraktikum23.screens
 
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.Orientation
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
@@ -34,22 +36,36 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mocopraktikum23.R
+import com.example.mocopraktikum23.model.DataOrException
+import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.screens.profil.ProfilViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
+
+
+
+
+
+@ExperimentalCoroutinesApi
 @Composable
 fun ProfilScreen(
-    profilViewModel: ProfilViewModel,
+    dataOrException: DataOrException<List<User>, Exception>,
+    profilViewModel: ProfilViewModel  = hiltViewModel(),
 ) {
+    val viewModel: ProfilViewModel
     val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())) {
+    val user = dataOrException.data
+    user.let {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
 
 //hier die Composables die angezeigt werden in stücken
             ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
@@ -59,26 +75,24 @@ fun ProfilScreen(
                     .fillMaxWidth()
                     .padding(15.dp)
             )
-            ReiseInformation(
-                reisezieleuberschrift =  "Lisa´s Reiseziele",
-                "#Istanbul",
-                "       #London",
-                "           #Hamburg"
-            )
-            ReiseTimeline(
-                vergangeneReiseliste = "Lisa´s Reise Timeline",
-                "Amsterdam 2019",
-                "       Köln 2020",
-                "            Mailand 2023"
-            )
+            ReiseInformation()
+            ReiseTimeline()
             PostSection()
         }
 
+    }
+    val e = dataOrException.e
+    e?.let {
+        Text(
+            text = e.message!!,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
 }
+
 
 @Composable
 fun  ProfilSection(modifier: Modifier= Modifier){
-
 
     Column(modifier = modifier
         .fillMaxWidth()){
@@ -93,7 +107,8 @@ fun  ProfilSection(modifier: Modifier= Modifier){
                 .size(100.dp)
                 .weight(3f))
             Spacer(modifier = Modifier.width(55.dp))
-            ProfilInformation(nameUndAlter = "Lisa, 25", wohnort = "Gummersbach" , email ="lisatravel@gmail.com" , buddiesName ="@travelwithlisa",modifier =modifier.weight(7f))
+            ProfilInformation(user = )
+        //  ProfilInformation(nameUndAlter = "Lisa, 25", wohnort = "Gummersbach" , email ="lisatravel@gmail.com" , buddiesName ="@travelwithlisa",modifier =modifier.weight(7f))
         }
 
         
@@ -140,11 +155,7 @@ fun ProfilPicture( image:Painter, modifier: Modifier = Modifier){
 
 @Composable
 fun ProfilInformation(
-    nameUndAlter: String,
-    wohnort: String,
-    email: String,
-    buddiesName: String,
-modifier: Modifier
+    user: User,
 ){
     val letterSpacing= 0.5.sp
     val lineHeight = 20.sp
@@ -154,28 +165,42 @@ val scrollState= rememberScrollState()
         .fillMaxWidth()
         .padding(horizontal = 20.dp)
     ){
-        Text(text = nameUndAlter,
+        Text(text = user.name,
         fontWeight = FontWeight.Bold,
         color =Color.Black,
         letterSpacing = letterSpacing,
         lineHeight= lineHeight
         )
 
-        Text(text = wohnort,
+        Text(text = user.wohnort,
             color =Color.Black,
             letterSpacing = letterSpacing,
-            lineHeight= lineHeight)
+            lineHeight= lineHeight
+        )
 
-        Text(text = email,
+        Text(text = user.alter,
             color =Color.Black,
             letterSpacing = letterSpacing,
-            lineHeight= lineHeight)
-
-        Text(text = buddiesName,
+            lineHeight= lineHeight
+        )
+        Text(text = user.nachname,
             color =Color.Black,
             fontWeight = FontWeight.Bold,
             letterSpacing = letterSpacing,
             lineHeight= lineHeight)
+
+        Text(text = user.geseheneOrte,
+            color =Color.Black,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = letterSpacing,
+            lineHeight= lineHeight)
+
+        Text(text = user.reiseZiele,
+            color =Color.Black,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = letterSpacing,
+            lineHeight= lineHeight)
+
     }
 }
 
@@ -223,23 +248,24 @@ fun Buttons( modifier: Modifier=Modifier,
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da eventuell unterschiedliche Anzahl an reisezielen gibt
-    reisezieleuberschrift: String,
-    reiseziel1: String? = null,
+    user: User,
+    /*reisezieleuberschrift: String,
+   reiseziel1: String? = null,
     reiseziel2: String? = null,
     reiseziel3: String? = null,
-    reiseziel4: String? = null,
+    reiseziel4: String? = null,*/
 ){
     val scrollState = rememberScrollState()
     val letterSpacing= 0.5.sp
     val lineHeight = 25.sp
-    val item = listOf<String>("Portugal","Türkei","Deutschland")
+  //  val item = listOf<String>("Portugal","Türkei","Deutschland")
 
     Column(modifier = Modifier
         .fillMaxWidth()
         .scrollable(state = scrollState, orientation = Orientation.Vertical)
         .padding(horizontal = 20.dp)
     ){
-        Text(text = reisezieleuberschrift,
+        Text(text = user.reiseZiele,
             fontWeight = FontWeight.Bold,
             color =Color.Black,
             fontSize = 19.sp,
@@ -247,12 +273,19 @@ fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da e
             lineHeight= lineHeight
         )
 
-        if (reiseziel1 != null) {
-            Text(text = reiseziel1,
+        if (user.reiseZiele != null) {
+            Text(text = user.reiseZiele,
                 color =Color.Black,
                 letterSpacing = letterSpacing,
                 lineHeight= lineHeight)
         }
+
+        //!!!!! ACHTUNG!!!!!!
+        // hier muss, falls es mehrere reiseziele sind noch ein Aufruf geschehen,
+        //dass die restlichen auch angezeigt werden
+
+
+    /*
 
         if (reiseziel2 != null) {
             Text(text = reiseziel2,
@@ -273,21 +306,16 @@ fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da e
                 letterSpacing = letterSpacing,
                 lineHeight= lineHeight)
         }
+
+ */
     }
 }
 
 
 
-
-
-
 @Composable
 fun ReiseTimeline( //sollte besser mit einer DataClass realsiert werden, da eventuell unterschiedliche Anzahl an reisezielen gibt
-    vergangeneReiseliste: String,
-    vergangeneReise1: String? = null,
-    vergangeneReise2: String? = null,
-    vergangeneReise3: String? = null,
-    vergangeneReise4: String? = null,
+  user: User
 ){
     val letterSpacing= 0.5.sp
     val lineHeight = 20.sp
@@ -297,14 +325,14 @@ val scrollState = rememberScrollState()
         .scrollable(state = scrollState, orientation = Orientation.Vertical)
         .padding(horizontal = 20.dp, vertical = 20.dp)
     ){
-        Text(text = vergangeneReiseliste,
+        Text(text = user.geseheneOrte,
             fontWeight = FontWeight.Bold,
             color =Color.Black,
             fontSize = 19.sp,
             letterSpacing = letterSpacing,
             lineHeight= lineHeight
         )
-
+/*
         if (vergangeneReise1 != null) {
             Text(text = vergangeneReise1,
                 color =Color.Black,
@@ -331,7 +359,7 @@ val scrollState = rememberScrollState()
                 color =Color.Black,
                 letterSpacing = letterSpacing,
                 lineHeight= lineHeight)
-        }
+        }*/
     }
 }
 
@@ -370,9 +398,28 @@ fun PostSection(
     }
 }
 
-/*
-@Preview
+
 @Composable
-fun ProfilScreenPreview(){
-    ProfilScreen()
-}*/
+fun UserActivity(dataOrException: DataOrException<List<User>, Exception>) {
+
+    val e = dataOrException.e
+    e?.let {
+        Text(
+            text = e.message!!,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+       /* CircularProgressBar(
+            isDisplayed = viewModel.loading.value
+        )*/
+    }
+}
+
+
+

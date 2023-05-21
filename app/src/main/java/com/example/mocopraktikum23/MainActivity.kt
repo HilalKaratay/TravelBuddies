@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-//import com.example.merveversuch10000.ui.theme.profil
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.screens.MainScreen
 import com.example.mocopraktikum23.ui.theme.MocoPraktikum23Theme
 
@@ -24,8 +24,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                    MainScreen()
-
-
                 }
 
                 }
