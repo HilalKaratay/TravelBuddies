@@ -30,12 +30,13 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mocopraktikum23.R
 import com.example.mocopraktikum23.screens.profilerstellen.ProfilErstellenViewModel
 
 @Composable
 fun ProfilErstellen(
-    profilErstellenViewModel: ProfilErstellenViewModel
+    profilErstellenViewModel: ProfilErstellenViewModel = hiltViewModel(),
 ){
     setImage()
     setTextfields()

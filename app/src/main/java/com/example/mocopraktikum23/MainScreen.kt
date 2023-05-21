@@ -21,6 +21,7 @@ import com.example.mocopraktikum23.NavigationBarScreen
 
 @Composable
 fun MainScreen() {
+
     val navController = rememberNavController()
     Scaffold(
         //scaffoldState = scaffoldState,
