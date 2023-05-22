@@ -29,25 +29,33 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.ListItem
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.mocopraktikum23.model.DataOrException
+import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.screens.map.MapViewModel
 
 
 @Composable
 fun MapScreen(
+    dataOrException: DataOrException<List<User>, Exception>,
     mapViewModel: MapViewModel = hiltViewModel(),
 ) {
+    val user = dataOrException.data
+    val user1:User = User(1, "Mara", "21", "Schneider", "Windhagen", "Barcelona", "Madrid")
+
     val scrollState = rememberScrollState()
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .scrollable(state = scrollState, Orientation.Vertical)){
         //Box(modifier = Modifier)
         Map()
         Leiste()
+        /*
         Daten(
-            name = "  Lisa,",
-            alter = "25",
-            standort = "Gummersbach",
-            reiseziel = "Mallorca",
+            name = user1.name,
+            alter = user1.alter,
+            standort = user1.wohnort,
+            reiseziel = user1.reiseZiele,
             onClick = { "clicked" })
         Daten(
             name = "  Mara,",
@@ -86,6 +94,9 @@ fun MapScreen(
         standort = "Overath",
         reiseziel = "          Istanbul",
         onClick = { "clicked" })
+         */
+
+        Daten(user = user1, onClick = {"clicked"})
     }
 }
 
@@ -109,7 +120,8 @@ fun Map(){
         Image(
             painterResource(id = R.drawable.gicon),
             contentDescription = "Map-Inhalt",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .border(6.dp, shape = RectangleShape, color = Color.LightGray)
         )
         //Text(text = "Map-Inhalt")
@@ -138,16 +150,17 @@ fun Leiste(){
 }
 @Composable
 fun Daten(
-    name: String,
-    alter: String,
-    standort: String,
-    reiseziel: String,
+    //name: String,
+    //alter: String,
+    //standort: String,
+    //reiseziel: String,
+    user:User,
     onClick: () -> Unit
 ){
     val width= 60.dp
     val height = 40.dp
 
-    if (name.isNotBlank() && alter.isNotBlank() && standort.isNotBlank() && reiseziel.isNotBlank())
+    if (user.name.isNotBlank() && user.alter.isNotBlank() && user.wohnort.isNotBlank() && user.reiseZiele.isNotBlank())
     {
     LazyColumn(modifier = Modifier
         .clickable(onClick = onClick)
@@ -158,7 +171,7 @@ fun Daten(
     ){
         item {
             Text(
-                text = " $name $alter $standort               $reiseziel  ",
+                text = " ${user.name} ${user.alter} ${user.wohnort}               ${user.reiseZiele}  ",
                 modifier = Modifier
                     .defaultMinSize(minWidth = (width))
                     .height(height)
