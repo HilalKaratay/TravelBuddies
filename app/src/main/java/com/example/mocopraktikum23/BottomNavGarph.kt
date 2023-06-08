@@ -7,14 +7,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.merveversuch10000.ui.theme.ProfilErstellen
-import com.example.mocopraktikum23.repository.UserRepository
-//import com.example.mocopraktikum23.repository.UserRepository
 import com.example.mocopraktikum23.screens.MenuScreen
 import com.example.mocopraktikum23.screens.ProfilScreen
-import com.example.mocopraktikum23.screens.map.MapViewModel
-import com.example.mocopraktikum23.screens.menu.MenuViewModel
-import com.example.mocopraktikum23.screens.profil.ProfilViewModel
-import com.example.mocopraktikum23.screens.profilerstellen.ProfilErstellenViewModel
 
 @Composable
 fun BottomNavGraph(navController: NavHostController, modifier: Modifier) {

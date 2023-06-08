@@ -32,10 +32,9 @@ import com.example.mocopraktikum23.screens.map.MapViewModel
 
 @Composable
 fun MapScreen(
-    dataOrException: DataOrException<List<User>, Exception>,
+
     mapViewModel: MapViewModel = hiltViewModel(),
 ) {
-    val user = dataOrException.data
     val user1:User = User(1, "Mara", "21", "Schneider", "Windhagen", "Barcelona", "Madrid")
 
     val scrollState = rememberScrollState()

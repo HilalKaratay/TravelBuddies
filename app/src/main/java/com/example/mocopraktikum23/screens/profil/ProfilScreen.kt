@@ -51,40 +51,23 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 @Composable
 fun ProfilScreen(
-    dataOrException: DataOrException<List<User>, Exception>,
     profilViewModel: ProfilViewModel  = hiltViewModel(),
 ) {
     val viewModel: ProfilViewModel
     val scrollState = rememberScrollState()
-    val user = dataOrException.data
-    user.let {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-        ) {
 
 //hier die Composables die angezeigt werden in stücken
-            ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
-            ProfilSection()
-            ButtonLeiste(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp)
-            )
-            ReiseInformation()
-            ReiseTimeline()
-            PostSection()
-        }
-
-    }
-    val e = dataOrException.e
-    e?.let {
-        Text(
-            text = e.message!!,
-            modifier = Modifier.padding(16.dp)
-        )
-    }
+    ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
+    ProfilSection()
+    ButtonLeiste(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(15.dp)
+    )
+    ReiseInformation(user =
+    )
+    ReiseTimeline(user = )
+    PostSection()
 }
 
 
@@ -395,7 +378,7 @@ fun PostSection(
     }
 }
 
-
+/*
 @Composable
 fun UserActivity(dataOrException: DataOrException<List<User>, Exception>) {
 
@@ -418,5 +401,5 @@ fun UserActivity(dataOrException: DataOrException<List<User>, Exception>) {
     }
 }
 
-
+*/
 
