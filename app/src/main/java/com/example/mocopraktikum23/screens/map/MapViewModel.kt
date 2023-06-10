@@ -5,12 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mocopraktikum23.model.User
+import com.example.mocopraktikum23.model.UserDAO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MapViewModel @Inject constructor(
-    private val userDao: UserDao
-) : ViewModel() {
+    private val userDao: UserDAO) : ViewModel() {
 
     val users: MutableState<List<User>> = mutableStateOf(emptyList())
     val loading: MutableState<Boolean> = mutableStateOf(false)
@@ -22,7 +22,7 @@ class MapViewModel @Inject constructor(
     private fun getUserData() {
         viewModelScope.launch {
             loading.value = true
-            users.value = userDao.getAllUsers()
+          //  users.value = userDao.getUser()
             loading.value = false
         }
     }

@@ -113,8 +113,6 @@ fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
 
 }
 
-
-
 @Composable
 fun ProfilPicture( image:Painter, modifier: Modifier = Modifier){
     val scrollState= rememberScrollState()
@@ -161,7 +159,7 @@ val scrollState= rememberScrollState()
             letterSpacing = letterSpacing,
             lineHeight= lineHeight
         )
-        Text(text = user.nachname,
+        Text(text = user.nachname,   //DAS IST DOPPELT
             color =Color.Black,
             fontWeight = FontWeight.Bold,
             letterSpacing = letterSpacing,

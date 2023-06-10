@@ -26,7 +26,7 @@ class ProfilViewModel @Inject constructor(
     private fun getUser() {
         viewModelScope.launch {
             loading.value = true
-            user.value = repository.getUser()
+            user.value = repository.getUserStream()
             loading.value = false
         }
     }
