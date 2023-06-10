@@ -9,21 +9,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MapViewModel @Inject constructor(
-    ):ViewModel() {
+    private val userDao: UserDao
+) : ViewModel() {
 
-        val user = mutableStateOf<User?>(null)
+    val users: MutableState<List<User>> = mutableStateOf(emptyList())
+    val loading: MutableState<Boolean> = mutableStateOf(false)
 
-        var loading = mutableStateOf(false)
+    init {
+        getUserData()
+    }
 
-
-        init {
-            getUser()
-        }
-
-        private fun getUser() {
-            viewModelScope.launch {
-                loading.value = true
-                loading.value = false
-            }
+    private fun getUserData() {
+        viewModelScope.launch {
+            loading.value = true
+            users.value = userDao.getAllUsers()
+            loading.value = false
         }
     }
+}
