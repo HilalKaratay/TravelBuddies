@@ -4,12 +4,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user") //Name der angelegten Tabelle
 data class User(
-    @PrimaryKey (autoGenerate = true) //Zeichnet die USERID als einen PRIMARYKEY aus!
-    val userID:Int =0,
-    val name:String,
+    @PrimaryKey(autoGenerate = true) //Zeichnet die USERID als einen PRIMARYKEY aus!
+    val userID: Int = 0,
+    val name: String,
     val alter: String,
-    val nachname:String,
-    val wohnort : String,
-    val geseheneOrte : String,
-    val reiseZiele: String
-    )
+    val wohnort: String,
+    val geseheneOrte: String,
+    val reiseziele: Any
+)
