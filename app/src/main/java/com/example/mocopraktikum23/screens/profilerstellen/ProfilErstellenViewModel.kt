@@ -8,9 +8,14 @@ import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.model.UserRepository
 import kotlinx.coroutines.launch
 
-class ProfilErstellenViewModel(private val userRepository: UserRepository) : ViewModel() {
+class ProfilErstellenViewModel(/*private val userRepository: UserRepository*/) : ViewModel() {
    private val _uploadSuccess = MutableLiveData<Boolean>()
     val uploadSuccess: LiveData<Boolean> = _uploadSuccess
+
+    private val userRepository : UserRepository //muss geändert werden
+        get() {
+            TODO()
+        }
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error

@@ -29,7 +29,7 @@ import javax.inject.Inject
         }
     }
 }*/
- class ProfilViewModel(  savedStateHandle: SavedStateHandle): ViewModel(){
+ class ProfilViewModel(): ViewModel(){
     companion object{
         private const val TIMEOUT_MILLIS = 5_000L
      }

@@ -34,7 +34,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mocopraktikum23.R
 import com.example.mocopraktikum23.model.User
 //import com.example.mocopraktikum23.screens.profil.ProfilUiState
@@ -44,7 +43,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 @Composable
 fun ProfilScreen(
-    profilViewModel: ProfilViewModel  = hiltViewModel(),
+    profilViewModel: ProfilViewModel,
 ) {
     val viewModel: ProfilViewModel
     val scrollState = rememberScrollState()

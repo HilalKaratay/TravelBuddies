@@ -25,7 +25,6 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.screens.map.MapViewModel
 
@@ -33,7 +32,7 @@ import com.example.mocopraktikum23.screens.map.MapViewModel
 @Composable
 fun MapScreen(
 
-    mapViewModel: MapViewModel = hiltViewModel(),
+    mapViewModel: MapViewModel,
 ) {
     val user1:User = User(1, "Mara", "21", "Windhagen", "Barcelona Madrid", "Schweden")
 

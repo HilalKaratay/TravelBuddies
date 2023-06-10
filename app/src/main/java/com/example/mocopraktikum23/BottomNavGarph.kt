@@ -9,6 +9,10 @@ import androidx.navigation.compose.composable
 import com.example.merveversuch10000.ui.theme.ProfilErstellen
 import com.example.mocopraktikum23.screens.MenuScreen
 import com.example.mocopraktikum23.screens.ProfilScreen
+import com.example.mocopraktikum23.screens.map.MapViewModel
+import com.example.mocopraktikum23.screens.menu.MenuViewModel
+import com.example.mocopraktikum23.screens.profil.ProfilViewModel
+import com.example.mocopraktikum23.screens.profilerstellen.ProfilErstellenViewModel
 
 @Composable
 fun BottomNavGraph(navController: NavHostController, modifier: Modifier) {
@@ -19,16 +23,16 @@ fun BottomNavGraph(navController: NavHostController, modifier: Modifier) {
     )
     {
         composable(route = NavigationBarScreen.Profil.route) {
-            ProfilScreen()
+            ProfilScreen(ProfilViewModel())
         }
         composable(route = NavigationBarScreen.Map.route) {
-            MapScreen()
+            MapScreen(MapViewModel())
         }
         composable(route = NavigationBarScreen.Menu.route) {
-            MenuScreen()
+            MenuScreen(MenuViewModel())
         }
         composable(route = NavigationBarScreen.Profilerstellen.route) {
-            ProfilErstellen()
+            ProfilErstellen(ProfilErstellenViewModel())
 
         }
     }
