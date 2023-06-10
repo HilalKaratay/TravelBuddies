@@ -20,7 +20,7 @@ class ProfilErstellenViewModel(private val userRepository: UserRepository) : Vie
             name = userData.Benutzernamen,
             alter = userData.Alter.toString(),
             wohnort = userData.Wohnort,
-            reiseZiele = userData.Reiseziele.joinToString(","),
+            reiseZiele = userData.reiseziele.joinToString(","),
             geseheneOrte = userData.GeseheneOrte.joinToString(",")
         )
 
