@@ -35,7 +35,14 @@ fun MapScreen(
 
     mapViewModel: MapViewModel = hiltViewModel(),
 ) {
-    val user1:User = User(1, "Mara", "21", "Schneider", "Windhagen", "Barcelona", "Madrid")
+    val user1:User = User(
+        1,
+        "Mara",
+        "21",
+        "Windhagen",
+        "Barcelona",
+        userData.Reiseziele.joinToString(",")
+    )
 
     val scrollState = rememberScrollState()
     Column(
