@@ -7,8 +7,9 @@ data class User(
     @PrimaryKey(autoGenerate = true) //Zeichnet die USERID als einen PRIMARYKEY aus!
     val userID: Int = 0,
     val name: String,
+    val nachname: String,
     val alter: String,
     val wohnort: String,
     val geseheneOrte: String,
-    val reiseziele: Any
+    val reiseZiele: String
 )
