@@ -41,7 +41,6 @@ fun MainScreen() {
 
 @Composable
 fun Toolbar() {
-
         TopAppBar(
             backgroundColor = Color.Gray,
             elevation = 4.dp,
@@ -65,7 +64,7 @@ fun BottomBar(navController: NavHostController ) {
         NavigationBarScreen.Map,
         NavigationBarScreen.Menu,
         NavigationBarScreen.Profil,
-        NavigationBarScreen.Profilerstellen
+        NavigationBarScreen.ProfilErstellen
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

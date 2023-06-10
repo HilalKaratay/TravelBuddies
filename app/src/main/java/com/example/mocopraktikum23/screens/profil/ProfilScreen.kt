@@ -34,18 +34,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mocopraktikum23.AppViewModelProvider
+import com.example.mocopraktikum23.NavigationZiel
 import com.example.mocopraktikum23.R
 import com.example.mocopraktikum23.model.User
 //import com.example.mocopraktikum23.screens.profil.ProfilUiState
 import com.example.mocopraktikum23.screens.profil.ProfilViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+
+object ProfilScreen : NavigationZiel {
+    override val route = "Profilscreen"
+
+}
 @ExperimentalCoroutinesApi
 @Composable
 fun ProfilScreen(
-    profilViewModel: ProfilViewModel,
+    profilViewModel: ProfilViewModel= androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory),
 ) {
-    val viewModel: ProfilViewModel
+
     val scrollState = rememberScrollState()
 
 //hier die Composables die angezeigt werden in stücken

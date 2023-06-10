@@ -1,14 +1,7 @@
 package com.example.mocopraktikum23.screens.profil
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.mocopraktikum23.model.User
-import com.example.mocopraktikum23.model.UserRepository
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 //@HiltViewModel
 /*class ProfilViewModel @Inject constructor(
@@ -29,7 +22,7 @@ import javax.inject.Inject
         }
     }
 }*/
- class ProfilViewModel(): ViewModel(){
+ class ProfilViewModel(createSavedStateHandle: SavedStateHandle) : ViewModel(){
     companion object{
         private const val TIMEOUT_MILLIS = 5_000L
      }

@@ -29,10 +29,15 @@ import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.screens.map.MapViewModel
 
 
+
+object Mapscreen : NavigationZiel {
+    override val route = "Mapscreen"
+
+}
 @Composable
 fun MapScreen(
 
-    mapViewModel: MapViewModel,
+    mapViewModel: MapViewModel= androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val user1:User = User(1, "Mara", "21", "Windhagen", "Barcelona Madrid", "Schweden")
 

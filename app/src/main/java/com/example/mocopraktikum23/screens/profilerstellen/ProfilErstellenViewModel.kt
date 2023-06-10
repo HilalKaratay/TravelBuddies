@@ -1,49 +1,71 @@
 package com.example.mocopraktikum23.screens.profilerstellen
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
 import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.model.UserRepository
-import kotlinx.coroutines.launch
 
-class ProfilErstellenViewModel(/*private val userRepository: UserRepository*/) : ViewModel() {
+class ProfilErstellenViewModel(private val userRepository: UserRepository) : ViewModel() {
    private val _uploadSuccess = MutableLiveData<Boolean>()
     val uploadSuccess: LiveData<Boolean> = _uploadSuccess
 
-    private val userRepository : UserRepository //muss geändert werden
-        get() {
-            TODO()
+    var userUiState by mutableStateOf(UserUiState())
+        private set
+
+    fun updateUiState(userDetails: UserDetails) {
+        userUiState =
+            UserUiState(userDetails = userDetails, isEntryValid = validateInput(userDetails))
+    }
+
+    suspend fun saveUser() {
+        if (validateInput()) {
+            userRepository.insertUser(userUiState.userDetails.toUser())
         }
+    }
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
-    fun uploadUserData(userData: UserData) {
-        val user = User(
-            name = userData.Benutzernamen,
-            alter = userData.Alter.toString(),
-            wohnort = userData.Wohnort,
-            reiseZiele = userData.reiseziele.joinToString(","),
-            geseheneOrte = userData.GeseheneOrte.joinToString(",")
-        )
-
-        viewModelScope.launch {
-          try {
-              userRepository.insertUser(user)
-              _uploadSuccess.value = true
-          } catch (e: Exception) {
-              _error.value = "Fehler beim Hochladen des Profils: ${e.message}"
-          }
+    private fun validateInput(uiState: UserDetails = userUiState.userDetails): Boolean {
+        return with(uiState) {
+            benutzername.isNotBlank() && alter.isNotBlank() && wohnort.isNotBlank() && reiseZiele.isNotBlank() && geseheneOrte.isNotBlank()
         }
     }
 }
 
-data class UserData(
-    val Benutzernamen: String,
-    val Alter: Int,
-    val Wohnort: String,
-    val reiseziele: List<String>,
-    val GeseheneOrte: List<String>
+
+    fun uploadUserData(userData: UserDetails) {
+        val user = User(
+            id = userData.id,
+            name = userData.benutzername,
+            alter = userData.alter.toString(),
+            wohnort = userData.wohnort,
+            reiseZiele = userData.reiseZiele,
+            geseheneOrte = userData.geseheneOrte
+        )
+    }
+
+data class UserUiState(
+    val userDetails: UserDetails = UserDetails(),
+    val isEntryValid: Boolean = false
+)
+
+data class UserDetails(
+    val id: Int = 0,
+    val benutzername: String = "",
+    val alter: String = "",
+    val wohnort: String = "",
+    val reiseZiele: String = "",
+    val geseheneOrte: String ="",
+)
+
+fun UserDetails.toUser(): User = User(
+    id = id,
+    name = benutzername,
+    alter = alter,
+    wohnort = wohnort,
+    reiseZiele = reiseZiele,
+    geseheneOrte = geseheneOrte
 )
