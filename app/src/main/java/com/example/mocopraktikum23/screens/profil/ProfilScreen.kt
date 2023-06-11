@@ -34,37 +34,37 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.mocopraktikum23.AppViewModelProvider
+import com.example.mocopraktikum23.NavigationZiel
 import com.example.mocopraktikum23.R
 import com.example.mocopraktikum23.model.User
+//import com.example.mocopraktikum23.screens.profil.ProfilUiState
 import com.example.mocopraktikum23.screens.profil.ProfilViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
+object ProfilScreen : NavigationZiel {
+    override val route = "Profilscreen"
 
-
-
-
-
+}
 @ExperimentalCoroutinesApi
 @Composable
 fun ProfilScreen(
-    profilViewModel: ProfilViewModel  = hiltViewModel(),
+    profilViewModel: ProfilViewModel= androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory),
 ) {
-    val viewModel: ProfilViewModel
+
     val scrollState = rememberScrollState()
 
 //hier die Composables die angezeigt werden in stücken
-    ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
-    ProfilSection()
+   // ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
+  ProfilSection()
     ButtonLeiste(
         modifier = Modifier
             .fillMaxWidth()
             .padding(15.dp)
     )
-    ReiseInformation(user =
-    )
-    ReiseTimeline(user = )
+   // ReiseInformation()
+   // ReiseTimeline()
     PostSection()
 }
 
@@ -85,14 +85,13 @@ fun  ProfilSection(modifier: Modifier= Modifier){
                 .size(100.dp)
                 .weight(3f))
             Spacer(modifier = Modifier.width(55.dp))
-            ProfilInformation(user = )
-        //  ProfilInformation(nameUndAlter = "Lisa, 25", wohnort = "Gummersbach" , email ="lisatravel@gmail.com" , buddiesName ="@travelwithlisa",modifier =modifier.weight(7f))
+           // ProfilUser(userDetailsUiState = UserDetailUiState())
         }
 
         
     }
 }
-
+/*
 @Composable
 fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
     val scrollState = rememberScrollState()
@@ -110,8 +109,7 @@ fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
 
             )
     }
-
-}
+}*/
 
 @Composable
 fun ProfilPicture( image:Painter, modifier: Modifier = Modifier){
@@ -128,10 +126,23 @@ fun ProfilPicture( image:Painter, modifier: Modifier = Modifier){
         .padding(3.dp)
         .clip(CircleShape))
 }
+/*
+@Composable
+private fun ProfilUser(
+    userDetailsUiState: ProfilUiState,
+    modifier: Modifier= Modifier)
+{
+    Column(modifier = modifier.padding(1.dp)) {
+        
+       ProfilDetails(user = userDetailsUiState.userDetails.toUser(),
+       modifier =Modifier.fillMaxWidth())
+    }
+}
+*/
 
 @Composable
-fun ProfilInformation(
-    user: User,
+private fun ProfilDetails(
+    user: User, modifier: Modifier = Modifier
 ){
     val letterSpacing= 0.5.sp
     val lineHeight = 20.sp
@@ -141,44 +152,43 @@ val scrollState= rememberScrollState()
         .fillMaxWidth()
         .padding(horizontal = 20.dp)
     ){
-        Text(text = user.name,
-        fontWeight = FontWeight.Bold,
-        color =Color.Black,
-        letterSpacing = letterSpacing,
-        lineHeight= lineHeight
+        UserDetailsRow(
+            userDetail = user.name,
+            modifier = Modifier.padding(10.dp),
+               )
+
+        UserDetailsRow(userDetail = user.wohnort,
+            modifier = Modifier.padding(10.dp))
+
+
+        UserDetailsRow(userDetail = user.alter,
+            modifier = Modifier.padding(10.dp),
         )
 
-        Text(text = user.wohnort,
-            color =Color.Black,
-            letterSpacing = letterSpacing,
-            lineHeight= lineHeight
+
+        UserDetailsRow(
+            userDetail = user.geseheneOrte,
+            modifier = Modifier.padding(10.dp),
         )
 
-        Text(text = user.alter,
-            color =Color.Black,
-            letterSpacing = letterSpacing,
-            lineHeight= lineHeight
+        UserDetailsRow(userDetail = user.reiseZiele,
+            modifier = Modifier.padding(10.dp),
         )
-        Text(text = user.nachname,   //DAS IST DOPPELT
-            color =Color.Black,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = letterSpacing,
-            lineHeight= lineHeight)
-
-        Text(text = user.geseheneOrte,
-            color =Color.Black,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = letterSpacing,
-            lineHeight= lineHeight)
-
-        Text(text = user.reiseZiele,
-            color =Color.Black,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = letterSpacing,
-            lineHeight= lineHeight)
-
     }
 }
+
+
+@Composable
+private fun UserDetailsRow(
+   userDetail: String, modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier) {
+        Spacer(modifier = Modifier.weight(1f))
+        Text(text = userDetail,color =Color.Black,
+            fontWeight = FontWeight.Bold)
+    }
+}
+
 
 @Composable
 fun ButtonLeiste(modifier: Modifier =Modifier){
@@ -373,29 +383,3 @@ fun PostSection(
         }
     }
 }
-
-/*
-@Composable
-fun UserActivity(dataOrException: DataOrException<List<User>, Exception>) {
-
-    val e = dataOrException.e
-    e?.let {
-        Text(
-            text = e.message!!,
-            modifier = Modifier.padding(16.dp)
-        )
-    }
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-       /* CircularProgressBar(
-            isDisplayed = viewModel.loading.value
-        )*/
-    }
-}
-
-*/
-

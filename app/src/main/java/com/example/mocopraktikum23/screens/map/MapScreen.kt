@@ -35,7 +35,7 @@ fun MapScreen(
 
     mapViewModel: MapViewModel = hiltViewModel(),
 ) {
-    val user1:User = User(1, "Mara", "21", "Schneider", "Windhagen", "Barcelona", "Madrid")
+    val user1:User = User(1, "Mara", "Schneider","21" ,"Windhagen", "Barcelona Madrid","Schweden")
 
     val scrollState = rememberScrollState()
     Column(
@@ -166,7 +166,7 @@ fun Daten(
     ){
         item {
             Text(
-                text = " ${user.name} ${user.alter} ${user.wohnort}               ${user.reiseZiele}  ",
+                text = " ${user.name} ${user.alter} ${user.wohnort} ${user.reiseZiele}",
                 modifier = Modifier
                     .defaultMinSize(minWidth = (width))
                     .height(height)

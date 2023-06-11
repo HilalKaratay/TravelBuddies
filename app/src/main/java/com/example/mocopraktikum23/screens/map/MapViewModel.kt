@@ -2,15 +2,14 @@ package com.example.mocopraktikum23.screens.map
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mocopraktikum23.model.User
-import com.example.mocopraktikum23.model.UserDAO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MapViewModel @Inject constructor(
-    private val userDao: UserDAO) : ViewModel() {
+class MapViewModel @Inject constructor(createSavedStateHandle: SavedStateHandle) : ViewModel() {
 
     val users: MutableState<List<User>> = mutableStateOf(emptyList())
     val loading: MutableState<Boolean> = mutableStateOf(false)
