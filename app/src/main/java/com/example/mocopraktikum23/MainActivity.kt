@@ -1,5 +1,6 @@
 package com.example.mocopraktikum23
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,22 +16,15 @@ import com.example.mocopraktikum23.ui.theme.MocoPraktikum23Theme
 
 
 class MainActivity : ComponentActivity() {
-
-    lateinit var container : AppContainer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        container =AppDataContainer(this)
         setContent {
             MocoPraktikum23Theme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                ) {
+                Surface() {
                   MainScreen()
                 }
-
                 }
             }
         }
-
-
     }

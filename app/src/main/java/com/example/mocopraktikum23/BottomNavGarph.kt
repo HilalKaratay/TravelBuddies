@@ -22,7 +22,7 @@ fun BottomNavGraph(navController: NavHostController, modifier: Modifier) {
     {
         composable(
             route = NavigationBarScreen.Profil.route) {
-            ProfilErstellen()
+            ProfilScreen()
         }
         composable(
             route = NavigationBarScreen.Map.route) {
@@ -34,7 +34,7 @@ fun BottomNavGraph(navController: NavHostController, modifier: Modifier) {
         }
         composable(
             route = NavigationBarScreen.ProfilErstellen.route) {
-            ProfilScreen()
+            ProfilErstellen()
 
         }
     }

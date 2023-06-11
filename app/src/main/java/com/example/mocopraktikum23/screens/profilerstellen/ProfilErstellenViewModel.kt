@@ -6,12 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.SavedStateHandle
 import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.model.UserRepository
 
 class ProfilErstellenViewModel(private val userRepository: UserRepository) : ViewModel() {
-   private val _uploadSuccess = MutableLiveData<Boolean>()
+    private val _uploadSuccess = MutableLiveData<Boolean>()
     val uploadSuccess: LiveData<Boolean> = _uploadSuccess
 
     var userUiState by mutableStateOf(UserUiState())
@@ -38,9 +37,9 @@ class ProfilErstellenViewModel(private val userRepository: UserRepository) : Vie
 
     fun uploadUserData(userData: UserDetails) {
         val user = User(
-            id = userData.id,
-            name = userData.benutzername,
-            alter = userData.alter.toString(),
+            userID = userData.id,
+            benutzername = userData.benutzername,
+            alter = userData.alter,
             wohnort = userData.wohnort,
             reiseZiele = userData.reiseZiele,
             geseheneOrte = userData.geseheneOrte
@@ -62,8 +61,8 @@ data class UserDetails(
 )
 
 fun UserDetails.toUser(): User = User(
-    id = id,
-    name = benutzername,
+    userID = id,
+    benutzername = benutzername,
     alter = alter,
     wohnort = wohnort,
     reiseZiele = reiseZiele,

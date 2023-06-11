@@ -15,7 +15,7 @@ import androidx.room.RoomDatabase
 
         fun getDatabase(context: Context): DatabaseUser {
             return Instance ?: synchronized(this) {  //damit keine race conditions entstehen wichtig
-                Room.databaseBuilder(context, DatabaseUser::class.java, "User_Database")
+                Room.databaseBuilder(context, DatabaseUser::class.java, "users")
                     .build()
                     .also { Instance = it }
             }

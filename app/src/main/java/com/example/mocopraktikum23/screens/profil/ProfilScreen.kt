@@ -153,7 +153,7 @@ val scrollState= rememberScrollState()
         .padding(horizontal = 20.dp)
     ){
         UserDetailsRow(
-            userDetail = user.name,
+            userDetail = user.benutzername,
             modifier = Modifier.padding(10.dp),
                )
 

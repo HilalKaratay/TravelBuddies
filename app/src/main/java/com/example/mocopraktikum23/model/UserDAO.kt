@@ -14,17 +14,15 @@ import kotlinx.coroutines.flow.Flow
 interface UserDAO : List<User> {
     @Insert (onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert (user: User)
-
     @Update
     suspend fun update (user: User)
-
     @Delete
     suspend fun delete (user: User)
 
-    @Query("SELECT * from user WHERE userID = :userID")
+    @Query("SELECT * from users WHERE userID = :userID")
     fun getUser(userID:Int): Flow<User>  //Updatet sich automatisch mit einem Background Thread - es muss nicht sepeart programmiert werden
 
-    @Query("SELECT * from user ORDER BY  name ASC")
+    @Query("SELECT * from users ORDER BY benutzername ASC")
     fun getAllUser(): Flow<List<User>>  //Gibt alle User wieder die in der Tabelle/ Entity gespeichert sind
 
 }

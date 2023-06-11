@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.AppViewModelProvider
 import com.example.mocopraktikum23.MainActivity
 import com.example.mocopraktikum23.NavigationZiel
@@ -34,7 +35,7 @@ object ProfilErstellen : NavigationZiel {
 
 @Composable
 fun ProfilErstellen(
-    viewModel: ProfilErstellenViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)) {
+    viewModel: ProfilErstellenViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
     val coroutineScope = rememberCoroutineScope()
     Scaffold() { innerPadding ->
         ProfilerstellenGeruest(
@@ -163,46 +164,6 @@ fun ProfilErstellen(
             }
         }
     }
-/*
-    @Preview(showBackground = true)
-    @Composable
-    private fun ItemEntryScreenPreview() {
-
-        ProfilerstellenGeruest(userUiState = UserUiState(
-                UserDetails(
-                    benutzername = "User name", alter = "10", wohnort = "Gummersabach"
-                )
-            ), onItemValueChange = {}, onSaveClick = {})
-        }
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

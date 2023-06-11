@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "users") //Name der angelegten Tabelle
 data class User(
     @PrimaryKey(autoGenerate = true) //Zeichnet die USERID als einen PRIMARYKEY aus!
-    val id: Int = 0,
-    val name: String,
+    val userID: Int = 0,
+    val benutzername: String,
     val alter: String,
     val wohnort: String,
     val geseheneOrte: String,

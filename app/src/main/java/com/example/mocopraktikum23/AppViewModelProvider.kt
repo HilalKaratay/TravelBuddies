@@ -11,6 +11,7 @@ import com.example.mocopraktikum23.screens.map.MapViewModel
 import com.example.mocopraktikum23.screens.menu.MenuViewModel
 import com.example.mocopraktikum23.screens.profil.ProfilViewModel
 import com.example.mocopraktikum23.screens.profilerstellen.ProfilErstellenViewModel
+import com.example.mocopraktikum23.MainApplication
 
 object AppViewModelProvider {
     val Factory = viewModelFactory {
@@ -19,7 +20,7 @@ object AppViewModelProvider {
 
         }
         initializer {
-          ProfilErstellenViewModel(MainActivity().container.userRepository)
+          ProfilErstellenViewModel(mainApplication().container.userRepository)
         }
 
         initializer {
@@ -31,5 +32,5 @@ object AppViewModelProvider {
         }
     }
 }
-fun CreationExtras.MainActivity(): MainActivity =
-    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MainActivity)
+fun CreationExtras.mainApplication(): MainApplication =
+    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MainApplication)
