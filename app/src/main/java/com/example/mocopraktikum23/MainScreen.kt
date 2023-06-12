@@ -36,7 +36,6 @@ fun MainScreen() {
         )
     }
 
-
 }
 
 @Composable
@@ -47,11 +46,9 @@ fun Toolbar() {
             title = {
                 Text(
                     text = "TravelBuddies",
-
                     color = Color.Black,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 30.sp,
-                    //fontFamily = FontFamily.Cursive,
                 )
             })
     } //Das könnte man noch ausarbeiten. Hinzufügen des NAMENS der aktuellen seite

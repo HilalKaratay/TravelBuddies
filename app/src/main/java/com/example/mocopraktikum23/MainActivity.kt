@@ -14,14 +14,15 @@ import com.example.mocopraktikum23.model.AppDataContainer
 import com.example.mocopraktikum23.screens.MainScreen
 import com.example.mocopraktikum23.ui.theme.MocoPraktikum23Theme
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MocoPraktikum23Theme {
                 // A surface container using the 'background' color from the theme
-                Surface() {
+                Surface(
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background )
+                {
                   MainScreen()
                 }
                 }

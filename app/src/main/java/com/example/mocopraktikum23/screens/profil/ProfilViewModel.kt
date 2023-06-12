@@ -2,6 +2,7 @@ package com.example.mocopraktikum23.screens.profil
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.mocopraktikum23.screens.profilerstellen.UserDetails
 
 //@HiltViewModel
 /*class ProfilViewModel @Inject constructor(
@@ -27,5 +28,6 @@ import androidx.lifecycle.ViewModel
         private const val TIMEOUT_MILLIS = 5_000L
      }
  }
-//data class ProfilUiState(val userDetails: UserDetails = UserDetails())
+
+data class UserDetailsUiState(val userDetails: UserDetails = UserDetails())
 

@@ -34,12 +34,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.AppViewModelProvider
 import com.example.mocopraktikum23.NavigationZiel
 import com.example.mocopraktikum23.R
 import com.example.mocopraktikum23.model.User
 //import com.example.mocopraktikum23.screens.profil.ProfilUiState
 import com.example.mocopraktikum23.screens.profil.ProfilViewModel
+import com.example.mocopraktikum23.screens.profil.UserDetailsUiState
+import com.example.mocopraktikum23.screens.profilerstellen.toUser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -50,27 +53,29 @@ object ProfilScreen : NavigationZiel {
 @ExperimentalCoroutinesApi
 @Composable
 fun ProfilScreen(
-    profilViewModel: ProfilViewModel= androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory),
+    profilViewModel: ProfilViewModel= viewModel(factory = AppViewModelProvider.Factory),
+    modifier: Modifier = Modifier
 ) {
 
     val scrollState = rememberScrollState()
 
-//hier die Composables die angezeigt werden in stücken
-   // ProfilErstellen(image = painterResource(id = R.drawable.plus_sign))
-  ProfilSection()
+   //hier die Composables die angezeigt werden in stücken
+        ProfilSection(UserDetailsUiState(),
+        modifier= Modifier.fillMaxWidth())
     ButtonLeiste(
         modifier = Modifier
             .fillMaxWidth()
             .padding(15.dp)
     )
-   // ReiseInformation()
-   // ReiseTimeline()
     PostSection()
 }
 
 
 @Composable
-fun  ProfilSection(modifier: Modifier= Modifier){
+private fun  ProfilSection(
+userDetailsUiState : UserDetailsUiState,
+modifier: Modifier
+){
 
     Column(modifier = modifier
         .fillMaxWidth()){
@@ -85,31 +90,14 @@ fun  ProfilSection(modifier: Modifier= Modifier){
                 .size(100.dp)
                 .weight(3f))
             Spacer(modifier = Modifier.width(55.dp))
-           // ProfilUser(userDetailsUiState = UserDetailUiState())
+            ProfilDetails(user = userDetailsUiState.userDetails.toUser(),
+            modifier= Modifier.fillMaxWidth())
+
         }
 
         
     }
 }
-/*
-@Composable
-fun ProfilErstellen (image: Painter, modifier: Modifier =Modifier){
-    val scrollState = rememberScrollState()
-    Column(modifier = Modifier
-        .scrollable(state = scrollState, orientation = Orientation.Vertical)
-        .fillMaxWidth()
-        .padding(10.dp)) {
-        Image(painter = image, contentDescription =null, modifier= modifier
-            /*.border(
-                width = 1.dp,
-                color = Color.Black,
-                shape = CircleShape
-            )*/
-            .size(20.dp)
-
-            )
-    }
-}*/
 
 @Composable
 fun ProfilPicture( image:Painter, modifier: Modifier = Modifier){
@@ -126,19 +114,6 @@ fun ProfilPicture( image:Painter, modifier: Modifier = Modifier){
         .padding(3.dp)
         .clip(CircleShape))
 }
-/*
-@Composable
-private fun ProfilUser(
-    userDetailsUiState: ProfilUiState,
-    modifier: Modifier= Modifier)
-{
-    Column(modifier = modifier.padding(1.dp)) {
-        
-       ProfilDetails(user = userDetailsUiState.userDetails.toUser(),
-       modifier =Modifier.fillMaxWidth())
-    }
-}
-*/
 
 @Composable
 private fun ProfilDetails(
@@ -235,16 +210,10 @@ fun Buttons( modifier: Modifier=Modifier,
 @Composable
 fun ReiseInformation( //sollte besser mit einer DataClass realsiert werden, da eventuell unterschiedliche Anzahl an reisezielen gibt
     user: User,
-    /*reisezieleuberschrift: String,
-   reiseziel1: String? = null,
-    reiseziel2: String? = null,
-    reiseziel3: String? = null,
-    reiseziel4: String? = null,*/
 ){
     val scrollState = rememberScrollState()
     val letterSpacing= 0.5.sp
     val lineHeight = 25.sp
-  //  val item = listOf<String>("Portugal","Türkei","Deutschland")
 
     Column(modifier = Modifier
         .fillMaxWidth()
