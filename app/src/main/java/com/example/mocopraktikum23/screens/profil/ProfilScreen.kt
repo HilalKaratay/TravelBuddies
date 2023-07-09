@@ -156,6 +156,7 @@ val scrollState= rememberScrollState()
 
         UserDetailsRow(userDetail = user.alter,
             modifier = Modifier.padding(10.dp),
+
         )
 
 
@@ -166,6 +167,7 @@ val scrollState= rememberScrollState()
 
         UserDetailsRow(userDetail = user.reiseZiele,
             modifier = Modifier.padding(10.dp),
+
         )
     }
 }
