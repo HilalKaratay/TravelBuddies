@@ -9,7 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class NavigationBarScreen(var route: String, var icon: ImageVector, var name: String) {
-   object Menu : NavigationBarScreen(
+
+    object Menu : NavigationBarScreen(
             name = "Menü",
             route = "Menu",
             icon = Icons.Default.Menu,

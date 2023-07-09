@@ -3,6 +3,7 @@ package com.example.mocopraktikum23
 import android.app.DownloadManager.Query
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,6 +17,11 @@ import com.example.mocopraktikum23.screens.profilerstellen.ProfilErstellenViewMo
 
 @Composable
 fun BottomNavGraph(navController: NavHostController, modifier: Modifier) {
+    val profilViewModel: ProfilViewModel = viewModel()
+    val mapViewModel: MapViewModel = viewModel()
+    val menuViewModel: MenuViewModel = viewModel()
+    val profilErstellenViewModel: ProfilErstellenViewModel = viewModel()
+
 
     NavHost(
         navController = navController,
@@ -23,16 +29,16 @@ fun BottomNavGraph(navController: NavHostController, modifier: Modifier) {
     )
     {
         composable(route = NavigationBarScreen.Profil.route) {
-            ProfilScreen(ProfilViewModel())
+            ProfilScreen()
         }
         composable(route = NavigationBarScreen.Map.route) {
-            MapScreen(MapViewModel())
+            MapScreen()
         }
         composable(route = NavigationBarScreen.Menu.route) {
-            MenuScreen(MenuViewModel())
+            MenuScreen()
         }
-        composable(route = NavigationBarScreen.Profilerstellen.route) {
-            ProfilErstellen(ProfilErstellenViewModel())
+        composable(route = NavigationBarScreen.ProfilErstellen.route) {
+            ProfilErstellen()
 
         }
     }
