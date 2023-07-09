@@ -25,14 +25,20 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.model.User
 import com.example.mocopraktikum23.screens.map.MapViewModel
 
 
+
+object Mapscreen : NavigationZiel {
+    override val route = "Mapscreen"
+
+}
 @Composable
 fun MapScreen(
 
-    mapViewModel: MapViewModel,
+    mapViewModel: MapViewModel= viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val user1:User = User(1, "Mara", "21", "Windhagen", "Barcelona Madrid", "Schweden")
 
@@ -154,7 +160,7 @@ fun Daten(
     val width= 60.dp
     val height = 40.dp
 
-    if (user.name.isNotBlank() && user.alter.isNotBlank() && user.wohnort.isNotBlank() && user.reiseZiele.isNotBlank())
+    if (user.benutzername.isNotBlank() && user.alter.isNotBlank() && user.wohnort.isNotBlank() && user.reiseZiele.isNotBlank())
     {
     LazyColumn(modifier = Modifier
         .clickable(onClick = onClick)
@@ -165,7 +171,7 @@ fun Daten(
     ){
         item {
             Text(
-                text = " ${user.name} ${user.alter} ${user.wohnort} ${user.reiseZiele}",
+                text = " ${user.benutzername} ${user.alter} ${user.wohnort} ${user.reiseZiele}",
                 modifier = Modifier
                     .defaultMinSize(minWidth = (width))
                     .height(height)

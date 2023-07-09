@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="MissingDefaultResource">
+        <ignore path="D:/MocoPraktikum232/app/src/main/res/drawable-map/location.png" />
+        <ignore path="D:/MocoPraktikum232/app/src/main/res/drawable-map/location.png" />
+    </issue>
+</lint>
