@@ -40,7 +40,7 @@ fun MapScreen(
 
     mapViewModel: MapViewModel= viewModel(factory = AppViewModelProvider.Factory)
 ) {
-    val user1:User = User(1, "Mara", "21", "Windhagen", "Barcelona Madrid", "Schweden")
+   // val user1:User = User(1, "Mara", "21", "Windhagen", "Barcelona Madrid", "Schweden")
 
     val scrollState = rememberScrollState()
     Column(
@@ -96,7 +96,7 @@ fun MapScreen(
         onClick = { "clicked" })
          */
 
-        Daten(user = user1, onClick = {"clicked"})
+       // Daten(user = user1, onClick = {"clicked"})
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.mocopraktikum23.screens
 
+import android.window.SplashScreen
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -13,11 +14,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mocopraktikum23.BottomNavGraph
 import com.example.mocopraktikum23.NavigationBarScreen
+
 
 @Composable
 fun MainScreen() {
