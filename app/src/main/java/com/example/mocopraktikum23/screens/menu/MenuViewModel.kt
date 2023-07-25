@@ -1,9 +1,10 @@
 package com.example.mocopraktikum23.screens.menu
 
-import androidx.lifecycle.ViewModel
+import com.example.mocopraktikum23.TravelBuddiesViewModel
+import com.example.mocopraktikum23.model.service.LoginService
 
 
-class MenuViewModel : ViewModel() {
+class MenuViewModel(logService: LoginService) : TravelBuddiesViewModel(logService) {
 
 
 }

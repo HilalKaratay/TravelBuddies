@@ -9,5 +9,6 @@ data class User(
     val alter: String= "",
     val wohnort: String= "",
     val geseheneOrte: String ="",
-    val reiseZiele: String= ""
+    val reiseZiele: String= "",
+    val isAnonymous: Boolean = true
 )

@@ -1,9 +1,11 @@
 package com.example.mocopraktikum23
 
-const val PROFIL_ERSTELLEN_SCREEN = "ProfilerstellenScreen"
+const val REGISTRIEREN_SCREEN = "RegistrierenScreen"
 const val PROFIL_SCREEN ="ProfilScreen"
 const val MAP_SCREEN ="MapScreen"
 const val MENU_SCREEN ="MenuScreen"
+const val LOGIN_SCREEN ="LoginSreen"
+
 
 const val USER_ID = "usderId"
 const val USER_DEFAULT_ID = "-1"

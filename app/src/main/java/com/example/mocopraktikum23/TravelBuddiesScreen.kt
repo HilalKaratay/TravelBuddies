@@ -1,6 +1,5 @@
 package com.example.mocopraktikum23.screens
-
-import android.window.SplashScreen
+/*
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -14,18 +13,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.mocopraktikum23.BottomNavGraph
 import com.example.mocopraktikum23.NavigationBarScreen
-
-
 @Composable
 fun MainScreen() {
-
     val navController = rememberNavController()
     Scaffold(
         //scaffoldState = scaffoldState,
@@ -34,7 +27,7 @@ fun MainScreen() {
         )
 
     { innerPadding ->
-        BottomNavGraph(
+        (
             navController = navController,
             modifier = Modifier.padding(innerPadding)
         )
@@ -55,8 +48,7 @@ fun Toolbar() {
                     fontSize = 30.sp,
                 )
             })
-    } //Das könnte man noch ausarbeiten. Hinzufügen des NAMENS der aktuellen seite
-
+    }
 
 @Composable
 fun BottomBar(navController: NavHostController ) {
@@ -65,7 +57,7 @@ fun BottomBar(navController: NavHostController ) {
         NavigationBarScreen.Map,
         NavigationBarScreen.Menu,
         NavigationBarScreen.Profil,
-        NavigationBarScreen.ProfilErstellen
+
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -110,4 +102,4 @@ fun RowScope.AddItem(
         }
     )
 }
-
+*/

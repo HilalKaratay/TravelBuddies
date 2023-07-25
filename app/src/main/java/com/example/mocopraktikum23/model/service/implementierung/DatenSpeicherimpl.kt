@@ -9,12 +9,9 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
-import java.lang.reflect.Array.get
 import javax.inject.Inject
 
-class DatenSpeicherimpl
-@Inject
-constructor(private val firestore: FirebaseFirestore):
+class DatenSpeicherimpl @Inject constructor(private val firestore: FirebaseFirestore):
     DatenSpeicher {
     @OptIn(ExperimentalCoroutinesApi::class)
     override val users : Flow<List<User>>
