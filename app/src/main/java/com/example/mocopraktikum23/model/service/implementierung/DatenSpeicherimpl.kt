@@ -13,7 +13,6 @@ import javax.inject.Inject
 
 class DatenSpeicherimpl @Inject constructor(private val firestore: FirebaseFirestore):
     DatenSpeicher {
-    @OptIn(ExperimentalCoroutinesApi::class)
     override val users : Flow<List<User>>
     get() = firestore.collection(USER_COLLECTION).dataObjects()
 
@@ -24,7 +23,6 @@ class DatenSpeicherimpl @Inject constructor(private val firestore: FirebaseFires
     trace(SAVE_USER_TRACE){
             val userWithUserId = user.copy()
             firestore.collection(SAVE_USER_TRACE).add(userWithUserId).await().id
-
         }
 
     override suspend fun update(user: User) {

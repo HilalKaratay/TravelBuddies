@@ -1,8 +1,12 @@
 package com.example.mocopraktikum23
 
 
+import android.Manifest
 import android.content.res.Resources
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
@@ -12,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -22,13 +27,23 @@ import com.example.mocopraktikum23.model.snackbar.SnackbarManager
 import com.example.mocopraktikum23.screens.MenuScreen
 import com.example.mocopraktikum23.screens.ProfilScreen
 import com.example.mocopraktikum23.screens.login.LoginScreen
+import com.example.mocopraktikum23.screens.login.LoginViewModel
+import com.example.mocopraktikum23.screens.splash.SplashScreen
 import com.example.mocopraktikum23.ui.theme.MocoPraktikum23Theme
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
 @ExperimentalMaterialApi
 fun TravelBuddiesApp() {
     MocoPraktikum23Theme {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            RequestNotificationPermissionDialog()
+        }
         Surface(color = MaterialTheme.colors.background) {
             val appState = rememberAppState()
 
@@ -46,7 +61,7 @@ fun TravelBuddiesApp() {
             ) { innerPaddingModifier ->
                 NavHost(
                     navController = appState.navController,
-                    startDestination = LOGIN_SCREEN,
+                    startDestination = SPLASH_SCREEN,
                     modifier = Modifier.padding(innerPaddingModifier)
                 ) {
                     travelBuddiesGraph(appState)
@@ -55,6 +70,20 @@ fun TravelBuddiesApp() {
         }
     }
 }
+
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun RequestNotificationPermissionDialog() {
+    val permissionState = rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
+
+    if (!permissionState.status.isGranted) {
+        if (permissionState.status.shouldShowRationale) RationaleDialog()
+        else PermissionDialog { permissionState.launchPermissionRequest() }
+    }
+}
+
 
 @Composable
 fun rememberAppState(
@@ -75,14 +104,28 @@ fun resources(): Resources {
     return LocalContext.current.resources
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalMaterialApi
 fun NavGraphBuilder.travelBuddiesGraph(appState: TravelBuddiesAppState) {
+
+    composable(SPLASH_SCREEN) {
+        SplashScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+    }
+
     composable(REGISTRIEREN_SCREEN) {
+
         RegistrierenScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
     }
 
     composable(LOGIN_SCREEN) {
-        LoginScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+        val viewModel = hiltViewModel<LoginViewModel>()
+        val state = viewModel.uiState
+        LoginScreen(
+            //openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) },
+            state = state,
+            onEmailChange = viewModel::onEmailChange,
+            onPasswordChange = viewModel::onPasswordChange,
+            onSignInClick = viewModel::onSignInClick)
     }
 
     composable(MAP_SCREEN) {

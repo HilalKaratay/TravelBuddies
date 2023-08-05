@@ -4,7 +4,8 @@ const val REGISTRIEREN_SCREEN = "RegistrierenScreen"
 const val PROFIL_SCREEN ="ProfilScreen"
 const val MAP_SCREEN ="MapScreen"
 const val MENU_SCREEN ="MenuScreen"
-const val LOGIN_SCREEN ="LoginSreen"
+const val LOGIN_SCREEN ="LoginScreen"
+const val SPLASH_SCREEN = "SplashScreen"
 
 
 const val USER_ID = "usderId"

@@ -3,6 +3,8 @@ package com.example.mocopraktikum23.ui.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -31,6 +33,23 @@ private val LightColorScheme = lightColorScheme(
 
 )
 
+private val DarkColorPalette =
+    darkColors(primary = LightGrey, primaryVariant = LightGrey, secondary = LightGrey)
+
+private val LightColorPalette =
+    lightColors(primary = LightGrey, primaryVariant = LightGrey, secondary = LightGrey)
+
+@Composable
+fun MocoPraktikum23Theme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+    val colors = if (darkTheme) DarkColorPalette else LightColorPalette
+
+    androidx.compose.material.MaterialTheme(
+        colors = colors,
+        content = content
+    )
+}
+
+/*
 @Composable
 fun MocoPraktikum23Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -61,4 +80,4 @@ fun MocoPraktikum23Theme(
         typography = Typography,
         content = content
     )
-}
+}*/
