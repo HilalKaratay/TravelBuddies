@@ -28,7 +28,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mocopraktikum23.R
-import com.example.mocopraktikum23.screens.login.LoginEvent
 
 
 object RegistrierenScreen: NavigationZiel {
@@ -87,7 +86,7 @@ fun BasicField(
 }
 
 @Composable
-fun EmailField(value: String, onNewValue: (LoginEvent) -> Unit, modifier: Modifier = Modifier) {
+fun EmailField(value: String, onNewValue: (String) -> Unit, modifier: Modifier = Modifier) {
     OutlinedTextField(
         singleLine = true,
         modifier = modifier,
@@ -99,7 +98,7 @@ fun EmailField(value: String, onNewValue: (LoginEvent) -> Unit, modifier: Modifi
 }
 
 @Composable
-fun PasswordField(value: String, onNewValue: (LoginEvent) -> Unit, modifier: Modifier = Modifier) {
+fun PasswordField(value: String, onNewValue: (String) -> Unit, modifier: Modifier = Modifier) {
     PasswordField(value,onNewValue, modifier)
 }
 

@@ -11,8 +11,6 @@ import com.example.mocopraktikum23.screens.registrieren.isValidEmail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
-
 @HiltViewModel
 class LoginViewModel @Inject constructor(
   private val accountService: AccountService,
@@ -26,7 +24,7 @@ class LoginViewModel @Inject constructor(
   private val password
     get() = uiState.value.password
 
-  fun onEmailChange(newValue: String) {
+  fun onEmailChange(newValue: String): Unit {
     uiState.value = uiState.value.copy(email = newValue)
   }
 
@@ -34,7 +32,7 @@ class LoginViewModel @Inject constructor(
     uiState.value = uiState.value.copy(password = newValue)
   }
 
-  fun onSignInClick(openAndPopUp: (String, String) -> Unit) {
+  fun onSignInClick(openAndPopUp: (String, String)-> Unit) {
     if (!email.isValidEmail()) {
       SnackbarManager.showMessage("Email ist nicht korrekt")
       return

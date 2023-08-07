@@ -118,14 +118,7 @@ fun NavGraphBuilder.travelBuddiesGraph(appState: TravelBuddiesAppState) {
     }
 
     composable(LOGIN_SCREEN) {
-        val viewModel = hiltViewModel<LoginViewModel>()
-        val state = viewModel.uiState
-        LoginScreen(
-            //openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) },
-            state = state,
-            onEmailChange = viewModel::onEmailChange,
-            onPasswordChange = viewModel::onPasswordChange,
-            onSignInClick = viewModel::onSignInClick)
+        LoginScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
     }
 
     composable(MAP_SCREEN) {
