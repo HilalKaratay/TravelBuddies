@@ -16,7 +16,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.mocopraktikum23.NavigationBarScreen
+import com.example.mocopraktikum23.model.navigation.NavigationBarScreen
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()

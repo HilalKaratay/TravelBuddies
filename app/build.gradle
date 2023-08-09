@@ -97,6 +97,11 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.44")
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
+    //Google Maps
+    implementation 'com.google.android.libraries.places:places:3.0.0'
+    implementation 'com.google.maps.android:maps-compose:2.11.4'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     implementation("com.google.firebase:firebase-analytics-ktx")

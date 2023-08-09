@@ -3,7 +3,7 @@ package com.example.merveversuch10000.ui.theme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.ui.unit.dp
-import com.example.mocopraktikum23.NavigationZiel
+import com.example.mocopraktikum23.model.navigation.NavigationZiel
 import com.example.mocopraktikum23.screens.registrieren.RegistrierenViewModel
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState

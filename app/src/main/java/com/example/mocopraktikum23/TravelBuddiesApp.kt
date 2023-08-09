@@ -108,29 +108,36 @@ fun resources(): Resources {
 @ExperimentalMaterialApi
 fun NavGraphBuilder.travelBuddiesGraph(appState: TravelBuddiesAppState) {
 
-    composable(SPLASH_SCREEN) {
-        SplashScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
-    }
+        composable(SPLASH_SCREEN) {
+            SplashScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+        }
 
-    composable(REGISTRIEREN_SCREEN) {
+        composable(REGISTRIEREN_SCREEN) {
 
-        RegistrierenScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
-    }
+            RegistrierenScreen(openAndPopUp = { route, popUp ->
+                appState.navigateAndPopUp(
+                    route,
+                    popUp
+                )
+            })
+        }
 
-    composable(LOGIN_SCREEN) {
-        LoginScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
-    }
+        composable(LOGIN_SCREEN) {
+            LoginScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+        }
 
-    composable(MAP_SCREEN) {
-        MapScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
-    }
+        composable(MAP_SCREEN) {
+            MapScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+        }
 
-    composable(PROFIL_SCREEN) {
-        ProfilScreen(openAndPopUp = { route,popUp-> appState.navigateAndPopUp(route, popUp) }) }
+        composable(PROFIL_SCREEN) {
+            ProfilScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+        }
 
-    composable(MENU_SCREEN) {
-        MenuScreen(openAndPopUp = { route,popUp-> appState.navigateAndPopUp(route, popUp) }) }
-/*
+        composable(MENU_SCREEN) {
+            MenuScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+        }
+        /*
     composable(
         route = "$USER_ID_ARG",
         arguments = listOf(navArgument(USER_ID) { defaultValue = USER_DEFAULT_ID })
@@ -140,4 +147,5 @@ fun NavGraphBuilder.travelBuddiesGraph(appState: TravelBuddiesAppState) {
             taskId = it.arguments?.getString(USER_ID) ?: USER_DEFAULT_ID
         )
     }*/
-}
+    }
+

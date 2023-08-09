@@ -1,4 +1,4 @@
-package com.example.mocopraktikum23
+package com.example.mocopraktikum23.model.navigation
 
 
 import androidx.compose.material.icons.Icons
