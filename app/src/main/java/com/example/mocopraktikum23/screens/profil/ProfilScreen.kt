@@ -27,7 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mocopraktikum23.model.navigation.NavigationZiel
 import com.example.mocopraktikum23.R
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -48,21 +47,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.mocopraktikum23.screens.profil.ProfilViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
-object ProfilScreen : NavigationZiel {
-    override val route = "ProfilScreen"
-
-}
 @OptIn(ExperimentalFoundationApi::class)
-@ExperimentalCoroutinesApi
 @Composable
 fun ProfilScreen(
-    openAndPopUp: (String, String) -> Unit,
-    viewModel: ProfilViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
 ) { Column(modifier = Modifier.fillMaxSize()) {
         TopBar(

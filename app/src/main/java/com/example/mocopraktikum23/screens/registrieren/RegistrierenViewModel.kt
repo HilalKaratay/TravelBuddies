@@ -1,87 +1,139 @@
 package com.example.mocopraktikum23.screens.registrieren
 
-import android.util.Patterns
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
-import javax.inject.Inject
-import com.example.mocopraktikum23.MENU_SCREEN
-import com.example.mocopraktikum23.TravelBuddiesViewModel
-import com.example.mocopraktikum23.REGISTRIEREN_SCREEN
-import com.example.mocopraktikum23.model.service.AccountService
-import com.example.mocopraktikum23.model.service.LoginService
-import com.example.mocopraktikum23.model.snackbar.SnackbarManager
-import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.regex.Pattern
+import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.navigation.ScreensNavigations
+import com.example.mocopraktikum23.model.service.Validierung
+import com.example.mocopraktikum23.screens.MenuScreen
+import com.google.firebase.auth.FirebaseAuth
+class RegistrierenViewModel(navController: NavController): ViewModel() {
 
-@HiltViewModel
-class RegistrierenViewModel @Inject constructor(
-    private val accountService: AccountService,
-    logService: LoginService): TravelBuddiesViewModel(logService){
-    var uiState = mutableStateOf(RegistrierenUiState())
-        private set
+    private val TAG = RegistrierenViewModel::class.simpleName
 
-    private val email
-        get() = uiState.value.email
-    private val password
-        get() = uiState.value.passwort
+    var RegistrierenUiState = mutableStateOf(RegistrierenUiState())
 
-    fun onEmailChange(newValue: String) {
-        uiState.value = uiState.value.copy(email = newValue)
-    }
+    var allValidationsPassed = mutableStateOf(false)
 
-    fun onPasswordChange(newValue: String) {
-        uiState.value = uiState.value.copy(passwort = newValue)
-    }
+    var signUpInProgress = mutableStateOf(false)
 
-    fun onNameChange(newValue: String) {
-        uiState.value = uiState.value.copy(name = newValue)
-    }
-    fun onWohnortChange(newValue: String) {
-        uiState.value = uiState.value.copy(wohnort = newValue)
-    }
-    fun onreiseZieleChange(newValue: String) {
-        uiState.value = uiState.value.copy(reiseZiele = newValue)
-    }
-    fun ongesehenOrteChange(newValue: String) {
-        uiState.value = uiState.value.copy(geseheneOrte = newValue)
-    }
+    fun onEvent(event: RegistrierenUiEvent) {
+        when (event) {
+            is RegistrierenUiEvent.FirstNameChanged -> {
+                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                    vorname = event.vorname
+                )
+                printState()
+            }
 
-    fun onSignUpClick(openAndPopUp: (String, String) -> Unit) {
-        if (!email.isValidEmail()) {
-            SnackbarManager.showMessage("Email ist nicht richtig")
-            return
+            is RegistrierenUiEvent.EmailChanged -> {
+                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                    email = event.email
+                )
+                printState()
+
+            }
+
+
+            is RegistrierenUiEvent.PasswortChanged -> {
+                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                    passwort = event.passwort
+                )
+                printState()
+
+            }
+            is RegistrierenUiEvent.RegisterButtonClicked -> {
+                registrieren()
+            }
+
+            is RegistrierenUiEvent.PrivacyPolicyCheckBoxClicked -> {
+                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                    privacyPolicyAccepted = event.status
+                )
+            }
+
+            is RegistrierenUiEvent.GeseheneOrteChanged -> TODO()
+            is RegistrierenUiEvent.ReiseZieleChanged -> TODO()
         }
-
-        if (!password.isValidPassword()) {
-            SnackbarManager.showMessage("Passwort ist nicht richtig")
-            return
-        }
-
-        launchCatching {
-            accountService.linkAccount(email, password)
-            openAndPopUp(MENU_SCREEN, REGISTRIEREN_SCREEN)
-        }
+        validateDataWithRules()
     }
-}
 
 
+    private fun registrieren() {
+        Log.d(TAG, "Inside_signUp")
+        printState()
+        createUserInFirebase(
+            email = RegistrierenUiState.value.email,
+            password = RegistrierenUiState.value.passwort)
+       // PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
+    }
 
-private const val MIN_PASS_LENGTH = 6
-private const val PASS_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$"
+    private fun validateDataWithRules() {
+        val nameResult = Validierung.validateVorname(
+            vorname = RegistrierenUiState.value.vorname
+        )
 
-fun String.isValidEmail(): Boolean {
-    return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-}
+        val emailResult = Validierung.validateEmail(
+            email = RegistrierenUiState.value.email
+        )
 
-fun String.isValidPassword(): Boolean {
-    return this.isNotBlank() &&
-            this.length >= MIN_PASS_LENGTH &&
-            Pattern.compile(PASS_PATTERN).matcher(this).matches()
-}
+        val passwortResult = Validierung.validatePasswort(
+            passwort = RegistrierenUiState.value.passwort
+        )
+            val privacyPolicyResult = Validierung.validatePrivacyPolicyAcceptance(
+            statusValue = RegistrierenUiState.value.privacyPolicyAccepted
+        )
 
-fun String.passwordMatches(repeated: String): Boolean {
-    return this == repeated
-}
 
-fun String.idFromParameter(): String {
-    return this.substring(1, this.length - 1)
+        Log.d(TAG, "Inside_validateDataWithRules")
+        Log.d(TAG, "nameResult= $nameResult")
+        Log.d(TAG, "emailResult= $emailResult")
+        Log.d(TAG, "passwordResult= $passwortResult")
+
+        Log.d(TAG, "privacyPolicyResult= $privacyPolicyResult")
+
+        RegistrierenUiState.value = RegistrierenUiState.value.copy(
+            vornameError = nameResult.status,
+            emailError = emailResult.status,
+            passwortError = passwortResult.status,
+            privacyPolicyError = privacyPolicyResult.status
+        )
+
+
+        allValidationsPassed.value = nameResult.status &&
+                emailResult.status && passwortResult.status && privacyPolicyResult.status
+
+    }
+
+
+    private fun printState() {
+        Log.d(TAG, "Inside_printState")
+        Log.d(TAG, RegistrierenUiState.value.toString())
+    }
+
+
+    private fun createUserInFirebase(email: String, password: String) {
+        signUpInProgress.value = true
+
+        FirebaseAuth
+            .getInstance()
+            .createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                Log.d(TAG, "Inside_OnCompleteListener")
+                Log.d(TAG, " isSuccessful = ${it.isSuccessful}")
+
+                signUpInProgress.value = false
+                if (it.isSuccessful) {
+
+                }
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "Inside_OnFailureListener")
+                Log.d(TAG, "Exception= ${it.message}")
+                Log.d(TAG, "Exception= ${it.localizedMessage}")
+            }
+    }
+
 }

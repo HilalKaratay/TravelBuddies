@@ -17,9 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.mocopraktikum23.screens.login.LoginViewModel
-import com.example.mocopraktikum23.screens.map.MapViewModel
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -29,12 +26,7 @@ import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapUiSettings
 
 @Composable
-fun MapScreen(
-    openAndPopUp: (String, String) -> Unit,
-    viewModel: MapViewModel = hiltViewModel()
-
-
-) {
+fun MapScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -64,14 +56,9 @@ fun MapScreen(
                     .fillMaxWidth()
                     .height(160.dp)
                     .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                            ),
-                            startY = 10f
-                        ),
+                            color = Color.Transparent)
                     )
-            )
+
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)

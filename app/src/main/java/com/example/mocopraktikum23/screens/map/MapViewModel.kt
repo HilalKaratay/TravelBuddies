@@ -7,8 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
-import com.example.mocopraktikum23.Manifest
-import com.example.mocopraktikum23.Manifest.*
 import com.example.mocopraktikum23.MapScreen
 import com.example.mocopraktikum23.TravelBuddiesViewModel
 import com.example.mocopraktikum23.model.User

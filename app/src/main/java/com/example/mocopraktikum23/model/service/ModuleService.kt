@@ -5,12 +5,8 @@ import com.example.mocopraktikum23.model.service.implementierung.DatenSpeicherim
 import com.example.mocopraktikum23.model.service.implementierung.LoginServiceImplementation
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-
 
 @Module
-@InstallIn(SingletonComponent::class)
 abstract class ModuleService {
     @Binds
     abstract fun provideAccountService(impl: AccountServiceImplementation): AccountService

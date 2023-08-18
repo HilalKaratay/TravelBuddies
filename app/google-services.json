@@ -1,62 +1,33 @@
 {
   "project_info": {
-    "project_number": "347840150178",
-    "project_id": "mocotravelbuddies",
-    "storage_bucket": "mocotravelbuddies.appspot.com"
+    "project_number": "928442042910",
+    "project_id": "moco-30a5f",
+    "storage_bucket": "moco-30a5f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:347840150178:android:c9a185a706d5a2bd58f5fb",
-        "android_client_info": {
-          "package_name": "com.company.MocoPraktikum23"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "347840150178-sb49pevp4fga9rpg2arf4c70gfc6akq5.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA3r5tfF-AcejWd9Uy1PaV9fd7NFXZDJeY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "347840150178-sb49pevp4fga9rpg2arf4c70gfc6akq5.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:347840150178:android:731c1abf4b3507e258f5fb",
+        "mobilesdk_app_id": "1:928442042910:android:75244ba86f84e0e323bc0f",
         "android_client_info": {
           "package_name": "com.example.mocopraktikum23"
         }
       },
       "oauth_client": [
         {
-          "client_id": "347840150178-sb49pevp4fga9rpg2arf4c70gfc6akq5.apps.googleusercontent.com",
+          "client_id": "928442042910-1nopi5llsn6pq47528d878f4kgvuqf2q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA3r5tfF-AcejWd9Uy1PaV9fd7NFXZDJeY"
+          "current_key": "AIzaSyDxjePpTHP-pCzHMJsMXoaiKuVH223zdhw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "347840150178-sb49pevp4fga9rpg2arf4c70gfc6akq5.apps.googleusercontent.com",
+              "client_id": "928442042910-1nopi5llsn6pq47528d878f4kgvuqf2q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

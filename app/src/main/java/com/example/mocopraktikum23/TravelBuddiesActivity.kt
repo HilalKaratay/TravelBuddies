@@ -5,9 +5,8 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.mutableStateOf
-import dagger.hilt.android.AndroidEntryPoint
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-@AndroidEntryPoint
 @ExperimentalMaterialApi
 class TravelBuddiesActivity : AppCompatActivity() {
    //Für die Map implemenation - acress auf standort
@@ -18,7 +17,8 @@ class TravelBuddiesActivity : AppCompatActivity() {
     private val locationPermissionGranted = mutableStateOf(false)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { TravelBuddiesApp() }
+        setContent { TravelBuddiesApp()
+        }
     }
 }
 

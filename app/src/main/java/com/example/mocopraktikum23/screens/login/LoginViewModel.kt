@@ -1,51 +1,87 @@
 package com.example.mocopraktikum23.screens.login
 
 import androidx.compose.runtime.mutableStateOf
-import com.example.mocopraktikum23.LOGIN_SCREEN
-import com.example.mocopraktikum23.MENU_SCREEN
-import com.example.mocopraktikum23.TravelBuddiesViewModel
-import com.example.mocopraktikum23.model.service.AccountService
-import com.example.mocopraktikum23.model.service.LoginService
-import com.example.mocopraktikum23.model.snackbar.SnackbarManager
-import com.example.mocopraktikum23.screens.registrieren.isValidEmail
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import com.example.mocopraktikum23.model.navigation.ScreensNavigations
+import android.util.Log
+import androidx.lifecycle.ViewModel
+import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.service.Validierung
+import com.google.firebase.auth.FirebaseAuth
 
-@HiltViewModel
-class LoginViewModel @Inject constructor(
-  private val accountService: AccountService,
-  logService: LoginService
-) : TravelBuddiesViewModel(logService) {
-  var uiState = mutableStateOf(LoginUiState())
-    private set
+class LoginViewModel : ViewModel() {
 
-  private val email
-    get() = uiState.value.email
-  private val password
-    get() = uiState.value.password
+  private val TAG = LoginViewModel::class.simpleName
+  var loginUIState = mutableStateOf(LoginUiState())
+  var allValidationsPassed = mutableStateOf(false)
+  var loginInProgress = mutableStateOf(false)
 
-  fun onEmailChange(newValue: String): Unit {
-    uiState.value = uiState.value.copy(email = newValue)
+
+  fun onEvent(event: LoginUiEvent) {
+    when (event) {
+      is LoginUiEvent.EmailChanged -> {
+        loginUIState.value = loginUIState.value.copy(
+          email = event.email
+        )
+      }
+
+      is LoginUiEvent.PasswordChanged -> {
+        loginUIState.value = loginUIState.value.copy(
+          password = event.password
+        )
+      }
+
+      is LoginUiEvent.LoginButtonClicked -> {
+        login()
+      }
+    }
+    validateLoginUIDataWithRules()
   }
 
-  fun onPasswordChange(newValue: String) {
-    uiState.value = uiState.value.copy(password = newValue)
+  private fun validateLoginUIDataWithRules() {
+    val emailResult = Validierung.validateEmail(
+      email = loginUIState.value.email
+    )
+
+
+    val passwordResult = Validierung.validatePasswort(
+      passwort= loginUIState.value.password
+    )
+
+    loginUIState.value = loginUIState.value.copy(
+      emailError = emailResult.status,
+      passwordError = passwordResult.status
+    )
+
+    allValidationsPassed.value = emailResult.status && passwordResult.status
+
   }
 
-  fun onSignInClick(openAndPopUp: (String, String)-> Unit) {
-    if (!email.isValidEmail()) {
-      SnackbarManager.showMessage("Email ist nicht korrekt")
-      return
-    }
+  private fun login() {
 
-    if (password.isBlank()) {
-      SnackbarManager.showMessage("Das Passwort ist nicht korrekt")
-      return
-    }
+    loginInProgress.value = true
+    val email = loginUIState.value.email
+    val password = loginUIState.value.password
 
-    launchCatching {
-      accountService.authenticate(email, password)
-      openAndPopUp(MENU_SCREEN, LOGIN_SCREEN)
-    }
+    FirebaseAuth
+      .getInstance()
+      .signInWithEmailAndPassword(email, password)
+      .addOnCompleteListener {
+        Log.d(TAG,"Inside_login_success")
+        Log.d(TAG,"${it.isSuccessful}")
+
+        if(it.isSuccessful){
+          loginInProgress.value = false
+          PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
+        }
+      }
+      .addOnFailureListener {
+        Log.d(TAG,"Inside_login_failure")
+        Log.d(TAG,"${it.localizedMessage}")
+
+        loginInProgress.value = false
+
+      }
+
   }
+
 }
