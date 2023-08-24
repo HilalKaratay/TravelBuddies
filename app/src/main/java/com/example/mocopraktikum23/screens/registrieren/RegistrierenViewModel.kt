@@ -9,7 +9,7 @@ import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.model.service.Validierung
 import com.example.mocopraktikum23.screens.MenuScreen
 import com.google.firebase.auth.FirebaseAuth
-class RegistrierenViewModel(navController: NavController): ViewModel() {
+class RegistrierenViewModel(): ViewModel() {
 
     private val TAG = RegistrierenViewModel::class.simpleName
 

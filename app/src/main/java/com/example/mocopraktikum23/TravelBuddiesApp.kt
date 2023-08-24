@@ -40,7 +40,6 @@ fun TravelBuddiesApp() {
         }
     }
 }
-
         @Composable
         fun BottomBar(navController: NavHostController) {
             val screens = listOf(

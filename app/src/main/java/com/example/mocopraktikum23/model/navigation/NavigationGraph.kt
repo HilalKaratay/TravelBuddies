@@ -6,16 +6,12 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.mocopraktikum23.MapScreen
 import com.example.mocopraktikum23.MapsActivity
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations.*
@@ -31,11 +27,6 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @ExperimentalPermissionsApi
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-
-    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-
-
     NavHost(modifier = Modifier
             .clip(
                 RoundedCornerShape(
@@ -45,10 +36,10 @@ fun NavigationGraph(navController: NavHostController) {
             )
             .padding(bottom = 65.dp),
         navController = navController,
-        startDestination = RegistrierenScreen.route
+        startDestination = "registrieren"
     ) {
 
-        composable("profile") {
+        composable("profil") {
             ProfilScreen()
         }
 
