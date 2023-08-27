@@ -61,9 +61,8 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
           .fillMaxSize()
       ) {
 
-        NormalTextComponent(value = "TravelBuddies")
         HeadingTextComponent(value = "Herzlich Willkommen")
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         MyTextFieldComponent(
           labelValue = "Email",
@@ -92,6 +91,8 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
           value = "Einloggen",
           onButtonClicked = {
             loginViewModel.onEvent(LoginUiEvent.LoginButtonClicked)
+            PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
+            //onLoginButtonClicked()
           },
           isEnabled = loginViewModel.allValidationsPassed.value
         )
@@ -101,6 +102,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 
         ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
           PostOfficeAppRouter.navigateTo(ScreensNavigations.RegistrierenScreen)
+         // onRegistrierenButtonClicked()
         })
       }
     }

@@ -9,14 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.R.*
 import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.screens.login.ButtonComponent
-import com.example.mocopraktikum23.screens.login.CheckboxComponent
 import com.example.mocopraktikum23.screens.login.ClickableLoginTextComponent
 import com.example.mocopraktikum23.screens.login.HeadingTextComponent
 import com.example.mocopraktikum23.screens.login.MyTextFieldComponent
@@ -44,8 +42,8 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 MyTextFieldComponent(
-                    labelValue ="Name",
-                    painterResource(id = drawable.message),
+                    labelValue = "Name",
+                    painterResource = painterResource(id = drawable.message),
                     onTextChanged = {
                         registrierenViewModel.onEvent(RegistrierenUiEvent.FirstNameChanged(it))
                     },
@@ -71,7 +69,7 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                     errorStatus = registrierenViewModel.RegistrierenUiState.value.passwortError
                 )
 
-/*
+                /*
                 MyTextFieldComponent(
                     labelValue ="ReiseZiele",
                     painterResource = painterResource(id = drawable.map_icon),
@@ -88,37 +86,29 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                 )*/
 
 
-                CheckboxComponent(value = "Terms and condition",
-                    onTextSelected = {
-                        PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
-                    },
-                    onCheckedChange = {
-                        registrierenViewModel.onEvent(RegistrierenUiEvent.PrivacyPolicyCheckBoxClicked(it))
-                    }
-                )
-
                 Spacer(modifier = Modifier.height(40.dp))
 
                 ButtonComponent(
-                    value = "Registriern",
+                    value = "Registrieren",
                     onButtonClicked = {
                         registrierenViewModel.onEvent(RegisterButtonClicked)
-                        PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
+                        PostOfficeAppRouter.navigateTo(ScreensNavigations.ProfilScreen)
                     },
+                    //onRegistrierenButtonClicked()},
                     isEnabled = registrierenViewModel.allValidationsPassed.value,
+
+
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-
-                ButtonComponent(
-                    value = "Einloggen",
-                    onButtonClicked = {
-                        PostOfficeAppRouter.navigateTo(ScreensNavigations.LoginScreen)                    },
+                ClickableLoginTextComponent(
+                    onTextSelected = {
+                        PostOfficeAppRouter.navigateTo(ScreensNavigations.LoginScreen)
+                    }
                 )
-
+                //onEinloggenButtonClicked()
             }
-
         }
 
         if(registrierenViewModel.signUpInProgress.value) {
@@ -126,11 +116,4 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
         }
     }
 
-
-}
-
-@Preview
-@Composable
-fun DefaultPreviewOfSignUpScreen() {
-    RegistrierenScreen()
 }

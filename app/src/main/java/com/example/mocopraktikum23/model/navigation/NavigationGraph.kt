@@ -14,11 +14,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
 import com.example.mocopraktikum23.MapScreen
 import com.example.mocopraktikum23.MapsActivity
+import com.example.mocopraktikum23.TravelBuddiesApp
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations.*
 import com.example.mocopraktikum23.screens.MenuScreen
 import com.example.mocopraktikum23.screens.ProfilScreen
+import com.example.mocopraktikum23.screens.login.ClickableLoginTextComponent
 import com.example.mocopraktikum23.screens.login.LoginScreen
+import com.example.mocopraktikum23.screens.login.LoginViewModel
 import com.example.mocopraktikum23.screens.registrieren.RegistrierenScreen
+import com.example.mocopraktikum23.screens.registrieren.RegistrierenViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 @SuppressLint("UnrememberedMutableState")
@@ -28,13 +32,13 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @Composable
 fun NavigationGraph(navController: NavHostController) {
     NavHost(modifier = Modifier
-            .clip(
-                RoundedCornerShape(
-                    bottomStart = 5.dp,
-                    bottomEnd = 5.dp
-                )
+        .clip(
+            RoundedCornerShape(
+                bottomStart = 5.dp,
+                bottomEnd = 5.dp
             )
-            .padding(bottom = 65.dp),
+        )
+        .padding(bottom = 65.dp),
         navController = navController,
         startDestination = "registrieren"
     ) {
@@ -52,8 +56,7 @@ fun NavigationGraph(navController: NavHostController) {
         }
 
         composable("login") {
-            LoginScreen()
-        }
+            LoginScreen()}
 
         composable("menu") {
             MenuScreen()

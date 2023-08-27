@@ -67,7 +67,6 @@ class RegistrierenViewModel(): ViewModel() {
         createUserInFirebase(
             email = RegistrierenUiState.value.email,
             password = RegistrierenUiState.value.passwort)
-       // PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
     }
 
     private fun validateDataWithRules() {
@@ -82,9 +81,7 @@ class RegistrierenViewModel(): ViewModel() {
         val passwortResult = Validierung.validatePasswort(
             passwort = RegistrierenUiState.value.passwort
         )
-            val privacyPolicyResult = Validierung.validatePrivacyPolicyAcceptance(
-            statusValue = RegistrierenUiState.value.privacyPolicyAccepted
-        )
+
 
 
         Log.d(TAG, "Inside_validateDataWithRules")
@@ -92,18 +89,17 @@ class RegistrierenViewModel(): ViewModel() {
         Log.d(TAG, "emailResult= $emailResult")
         Log.d(TAG, "passwordResult= $passwortResult")
 
-        Log.d(TAG, "privacyPolicyResult= $privacyPolicyResult")
 
         RegistrierenUiState.value = RegistrierenUiState.value.copy(
             vornameError = nameResult.status,
             emailError = emailResult.status,
             passwortError = passwortResult.status,
-            privacyPolicyError = privacyPolicyResult.status
+          //  privacyPolicyError = privacyPolicyResult.status
         )
 
 
         allValidationsPassed.value = nameResult.status &&
-                emailResult.status && passwortResult.status && privacyPolicyResult.status
+                emailResult.status && passwortResult.status
 
     }
 

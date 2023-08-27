@@ -14,8 +14,8 @@ import com.example.mocopraktikum23.R
 
 
 sealed class ScreensNavigations(val route: String, var icon: ImageVector, var name: String) {
-    object LoginScreen : ScreensNavigations("login", Icons.Default.Create,"login")
     object RegistrierenScreen : ScreensNavigations("registrieren", Icons.Default.Add,"registrieren")
+    object LoginScreen : ScreensNavigations("login", Icons.Default.Create,"login")
     object ProfilScreen : ScreensNavigations("profil", Icons.Default.Person,"Profil")
     object MapScreen : ScreensNavigations("map", Icons.Default.Map,"Map")
     object MenuScreen : ScreensNavigations("menu", Icons.Default.Menu,"Menu")
@@ -23,7 +23,8 @@ sealed class ScreensNavigations(val route: String, var icon: ImageVector, var na
 }
 
 object PostOfficeAppRouter {
-    var currentScreen: MutableState<ScreensNavigations> = mutableStateOf(ScreensNavigations.MenuScreen)
+
+    var currentScreen: MutableState<ScreensNavigations> = mutableStateOf(ScreensNavigations.RegistrierenScreen)
     fun navigateTo(destination : ScreensNavigations){
         currentScreen.value = destination
     }

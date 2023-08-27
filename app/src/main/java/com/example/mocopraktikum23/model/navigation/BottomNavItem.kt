@@ -7,6 +7,4 @@ data class BottomNavItem (val name: String,
                           val route: String,
                           val icon: ImageVector,
                           val onSelectedBatchVisible: Boolean,
-                          val onSelectedColor: Color,
-                          val onSelectIcon: ImageVector
 )
