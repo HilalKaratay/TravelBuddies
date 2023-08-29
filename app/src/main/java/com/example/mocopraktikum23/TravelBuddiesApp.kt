@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mocopraktikum23.model.navigation.NavigationGraph
 import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
+import com.example.mocopraktikum23.screens.MenuScreen
 import com.example.mocopraktikum23.screens.login.LoginScreen
 import com.example.mocopraktikum23.screens.profil.ProfilInformationenScreen
 import com.example.mocopraktikum23.screens.registrieren.RegistrierenScreen
@@ -49,8 +50,8 @@ fun TravelBuddiesApp() {
                         }
                         is ScreensNavigations.LoginScreen -> {
                             LoginScreen()
-                        }
-                        /*is ScreensNavigations.MenuScreen->{
+                        }/*
+                        is ScreensNavigations.MenuScreen->{
                             MenuScreen()
                         }
                         is ScreensNavigations.MapScreen->{

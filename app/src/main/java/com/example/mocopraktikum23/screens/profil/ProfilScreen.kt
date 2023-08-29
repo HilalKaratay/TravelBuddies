@@ -94,8 +94,8 @@ fun ProfilScreen() {
         ){
             Text("${userDataFromDB?.name}")
             Text("${userDataFromDB?.wohnort}")
-            Text("${userDataFromDB?.geseheneOrte}")
-            Text("${userDataFromDB?.reiseZiele}")
+            Text("Gesehene Orte   "+"${userDataFromDB?.geseheneOrte}")
+            Text("Reiseziele   "+"${userDataFromDB?.reiseZiele}")
 
         }
         Spacer(modifier = Modifier.height(25.dp))
