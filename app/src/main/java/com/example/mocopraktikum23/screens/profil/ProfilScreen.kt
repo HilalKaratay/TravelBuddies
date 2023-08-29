@@ -1,5 +1,6 @@
 package com.example.mocopraktikum23.screens
 
+import android.widget.Button
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +34,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -40,6 +42,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -47,19 +50,81 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mocopraktikum23.screens.profil.ProfilViewModel
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProfilScreen(){ Column(modifier = Modifier.fillMaxSize()) {
+fun ProfilScreen() {
+    val viewModel: ProfilViewModel = ProfilViewModel()
+
+    var showSignIn by remember {mutableStateOf(true)}
+   // viewModel.readFromDatabase()
+    viewModel.differentReadFromDatabase()
+
+    val signedInUser by viewModel.signedInUser.collectAsState()
+    val userDataFromDB by viewModel.userDataFromDB.collectAsState()
+    val newDataFromDB by viewModel.newDataFromDB.collectAsState()
+
+
+
+    Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
-                        name = "TravelBuddies Profil",
-                        modifier = Modifier
-                            .padding(10.dp))
+            name = "TravelBuddies Profil",
+            modifier = Modifier.padding(10.dp)
+        )
         Spacer(modifier = Modifier.height(4.dp))
-        ProfileSection()
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+            ) {
+                RoundImage(
+
+                    image = painterResource(id = R.drawable.profilpng),
+                    modifier = Modifier
+                        .size(100.dp)
+                        .weight(3f)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ){
+            Text("${signedInUser}"+"${newDataFromDB?.name}")
+            Text("${newDataFromDB?.wohnort}")
+            Text("${newDataFromDB?.geseheneOrte}")
+            Text("${newDataFromDB?.reiseZiele}")
+
+        }
         Spacer(modifier = Modifier.height(25.dp))
-        ButtonSection(modifier = Modifier.fillMaxWidth())
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            ActionButton(
+                text = "Freundschaftsanfrage",
+                icon = Icons.Default.KeyboardArrowDown,
+                modifier = Modifier
+                    .defaultMinSize(minWidth = 95.dp)
+                    .height(30.dp),
+            )
+            ActionButton(
+                text = "Nachricht",
+                modifier = Modifier
+                    .defaultMinSize(minWidth = 95.dp)
+                    .height(30.dp),
+            )
+        }
+
+
         Spacer(modifier = Modifier.height(25.dp))
 
         PostSection(
@@ -72,8 +137,10 @@ fun ProfilScreen(){ Column(modifier = Modifier.fillMaxSize()) {
                 painterResource(id = R.drawable.mailand2),
                 painterResource(id = R.drawable.portugal),
                 painterResource(id = R.drawable.portugal2),
-        ),
-        modifier = Modifier.fillMaxWidth())}
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
 
     @Composable
@@ -183,12 +250,12 @@ fun ProfilScreen(){ Column(modifier = Modifier.fillMaxSize()) {
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            Text(
+            /*
                 text = displayName,
                 fontWeight = FontWeight.Bold,
                 letterSpacing = letterSpacing,
-                lineHeight = lineHeight
-            )
+                lineHeight = lineHeight*/
+
             Text(
                 text = geseheneOrte,
                 letterSpacing = letterSpacing,
@@ -207,26 +274,9 @@ fun ProfilScreen(){ Column(modifier = Modifier.fillMaxSize()) {
     fun ButtonSection(
         modifier: Modifier = Modifier
     ) {
-        val minWidth = 95.dp
+        val minWidth = 90.dp
         val height = 30.dp
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            modifier = modifier
-        ) {
-            ActionButton(
-                text = "Freundschaftsanfrage",
-                icon = Icons.Default.KeyboardArrowDown,
-                modifier = Modifier
-                    .defaultMinSize(minWidth = minWidth)
-                    .height(height)
-            )
-            ActionButton(
-                text = "Nachricht",
-                modifier = Modifier
-                    .defaultMinSize(minWidth = minWidth)
-                    .height(height)
-            )
-        }
+
     }
 
     @Composable

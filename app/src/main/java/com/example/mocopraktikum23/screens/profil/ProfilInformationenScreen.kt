@@ -1,6 +1,5 @@
 package com.example.mocopraktikum23.screens.profil
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,10 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,16 +22,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.R
-import com.example.mocopraktikum23.model.User
-import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.screens.login.ButtonComponent
-import com.example.mocopraktikum23.screens.login.LoginUiEvent
 import com.example.mocopraktikum23.screens.login.MyTextFieldComponent
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+
 @Composable
 fun ProfilInformationenScreen(profilInfoViewModel: ProfilInfoViewModel= viewModel()){
     Box(
@@ -115,7 +106,7 @@ fun ProfilInformationenScreen(profilInfoViewModel: ProfilInfoViewModel= viewMode
                     value = "Speichern",
                     onButtonClicked = {
                         profilInfoViewModel.onEvent(ProfilInfoUiEvent.SpeichernButtonClicked)
-                        PostOfficeAppRouter.navigateTo(ScreensNavigations.ProfilScreen)
+                        AppRouter.navigateTo(ScreensNavigations.MenuScreen)
                     },
                     isEnabled = profilInfoViewModel.allValidationsPassed.value,
                 )

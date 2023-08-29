@@ -4,10 +4,8 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mocopraktikum23.TravelBuddiesViewModel
-import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
-import com.example.mocopraktikum23.model.service.LoginService
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -24,7 +22,7 @@ class MenuViewModel(): ViewModel() {
         val authStateListener = FirebaseAuth.AuthStateListener {
             if (it.currentUser == null) {
                 Log.d(TAG, "Inside sign outsuccess")
-                PostOfficeAppRouter.navigateTo(ScreensNavigations.LoginScreen)
+                AppRouter.navigateTo(ScreensNavigations.LoginScreen)
             } else {
                 Log.d(TAG, "Inside sign out is not complete")
             }

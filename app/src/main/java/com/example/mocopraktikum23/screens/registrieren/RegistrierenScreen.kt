@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.R.*
-import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.screens.login.ButtonComponent
 import com.example.mocopraktikum23.screens.login.ClickableLoginTextComponent
@@ -72,7 +72,7 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                     value = "Registrieren",
                     onButtonClicked = {
                         registrierenViewModel.onEvent(RegisterButtonClicked)
-                        PostOfficeAppRouter.navigateTo(ScreensNavigations.ProfilInformationenScreen)
+                        AppRouter.navigateTo(ScreensNavigations.ProfilInformationenScreen)
                     },
                     isEnabled = registrierenViewModel.allValidationsPassed.value,
                 )
@@ -81,7 +81,7 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
 
                 ClickableLoginTextComponent(
                     onTextSelected = {
-                        PostOfficeAppRouter.navigateTo(ScreensNavigations.LoginScreen)
+                        AppRouter.navigateTo(ScreensNavigations.LoginScreen)
                     }
                 )
             }

@@ -21,9 +21,8 @@ sealed class ScreensNavigations(val route: String, var icon: ImageVector, var na
     object ProfilInformationenScreen: ScreensNavigations("profilinformationen", Icons.Default.Check,"ProfilInformationen")
 }
 
-object PostOfficeAppRouter {
-
-    var currentScreen: MutableState<ScreensNavigations> = mutableStateOf(ScreensNavigations.RegistrierenScreen)
+object AppRouter {
+    var currentScreen: MutableState<ScreensNavigations> = mutableStateOf(ScreensNavigations.MenuScreen)
     fun navigateTo(destination : ScreensNavigations){
         currentScreen.value = destination
     }

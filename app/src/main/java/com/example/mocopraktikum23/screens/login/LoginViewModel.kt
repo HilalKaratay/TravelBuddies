@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.service.Validierung
 import com.google.firebase.auth.FirebaseAuth
 
@@ -70,7 +70,7 @@ class LoginViewModel : ViewModel() {
 
         if(it.isSuccessful){
           loginInProgress.value = false
-          PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
+          AppRouter.navigateTo(ScreensNavigations.MenuScreen)
         }
       }
       .addOnFailureListener {

@@ -3,7 +3,7 @@ package com.example.mocopraktikum23.screens.profil
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.model.service.ValidierungInformationen
 import com.google.firebase.auth.FirebaseUser
@@ -20,7 +20,8 @@ class ProfilInfoViewModel :ViewModel() {
     var profilInfoUiState = mutableStateOf(ProfilInfoUiState())
     var speichernProgress = mutableStateOf(false)
     val firebaseDatabase = FirebaseDatabase.getInstance("https://moco-30a5f-default-rtdb.europe-west1.firebasedatabase.app/")
-    val databaseReference = firebaseDatabase.getReference("User")
+    val databaseReference = firebaseDatabase.getReference("User").push()
+
 
     private val TAG = ProfilInfoViewModel::class.simpleName
 
@@ -56,7 +57,7 @@ class ProfilInfoViewModel :ViewModel() {
 
             is ProfilInfoUiEvent.SpeichernButtonClicked -> {
                 speichern()
-                PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
+                AppRouter.navigateTo(ScreensNavigations.MenuScreen)
             }
         }
         validateDataWithRules()
@@ -124,7 +125,7 @@ class ProfilInfoViewModel :ViewModel() {
 
         Log.d(TAG, "Inside_SaveDATA")
         printState()
-        val userData = ProfilInfoUiState(name,wohnort,geseheneOrte,reiseZiele)
+        val userData = ProfilInfoUiState(name, wohnort,geseheneOrte,reiseZiele)
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 databaseReference.setValue(userData)

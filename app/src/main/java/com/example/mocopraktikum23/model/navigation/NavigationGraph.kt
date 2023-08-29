@@ -12,6 +12,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.example.mocopraktikum23.BottomBar
 import com.example.mocopraktikum23.MapScreen
 import com.example.mocopraktikum23.MapsActivity
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations.*
@@ -39,7 +41,6 @@ fun NavigationGraph(navController: NavHostController) {
         navController = navController,
         startDestination = "registrieren"
     ) {
-
         composable("profil") {
             ProfilScreen()
         }

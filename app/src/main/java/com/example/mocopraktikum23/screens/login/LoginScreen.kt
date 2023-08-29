@@ -33,12 +33,11 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.R
-import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
+import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 
 @Composable
@@ -91,7 +90,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
           value = "Einloggen",
           onButtonClicked = {
             loginViewModel.onEvent(LoginUiEvent.LoginButtonClicked)
-            PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
+            AppRouter.navigateTo(ScreensNavigations.MenuScreen)
           },
           isEnabled = loginViewModel.allValidationsPassed.value
         )
@@ -100,7 +99,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 
 
         ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
-          PostOfficeAppRouter.navigateTo(ScreensNavigations.RegistrierenScreen)
+          AppRouter.navigateTo(ScreensNavigations.RegistrierenScreen)
         })
       }
     }
