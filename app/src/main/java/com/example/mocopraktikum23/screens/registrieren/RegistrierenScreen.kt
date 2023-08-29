@@ -92,7 +92,7 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                     value = "Registrieren",
                     onButtonClicked = {
                         registrierenViewModel.onEvent(RegisterButtonClicked)
-                        PostOfficeAppRouter.navigateTo(ScreensNavigations.ProfilScreen)
+                        PostOfficeAppRouter.navigateTo(ScreensNavigations.ProfilInformationenScreen)
                     },
                     //onRegistrierenButtonClicked()},
                     isEnabled = registrierenViewModel.allValidationsPassed.value,

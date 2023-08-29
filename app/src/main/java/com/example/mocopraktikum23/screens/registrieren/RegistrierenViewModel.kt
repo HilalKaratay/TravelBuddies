@@ -3,11 +3,7 @@ package com.example.mocopraktikum23.screens.registrieren
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
-import com.example.mocopraktikum23.model.navigation.PostOfficeAppRouter
-import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.model.service.Validierung
-import com.example.mocopraktikum23.screens.MenuScreen
 import com.google.firebase.auth.FirebaseAuth
 class RegistrierenViewModel(): ViewModel() {
 
@@ -70,8 +66,8 @@ class RegistrierenViewModel(): ViewModel() {
     }
 
     private fun validateDataWithRules() {
-        val nameResult = Validierung.validateVorname(
-            vorname = RegistrierenUiState.value.vorname
+        val nameResult = Validierung.validateName(
+            name = RegistrierenUiState.value.vorname
         )
 
         val emailResult = Validierung.validateEmail(
@@ -81,7 +77,6 @@ class RegistrierenViewModel(): ViewModel() {
         val passwortResult = Validierung.validatePasswort(
             passwort = RegistrierenUiState.value.passwort
         )
-
 
 
         Log.d(TAG, "Inside_validateDataWithRules")

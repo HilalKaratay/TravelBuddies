@@ -14,15 +14,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
 import com.example.mocopraktikum23.MapScreen
 import com.example.mocopraktikum23.MapsActivity
-import com.example.mocopraktikum23.TravelBuddiesApp
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations.*
 import com.example.mocopraktikum23.screens.MenuScreen
 import com.example.mocopraktikum23.screens.ProfilScreen
-import com.example.mocopraktikum23.screens.login.ClickableLoginTextComponent
 import com.example.mocopraktikum23.screens.login.LoginScreen
-import com.example.mocopraktikum23.screens.login.LoginViewModel
+import com.example.mocopraktikum23.screens.profil.ProfilInformationenScreen
 import com.example.mocopraktikum23.screens.registrieren.RegistrierenScreen
-import com.example.mocopraktikum23.screens.registrieren.RegistrierenViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 @SuppressLint("UnrememberedMutableState")
@@ -65,6 +62,11 @@ fun NavigationGraph(navController: NavHostController) {
         composable("mapsactivity") {
             MapsActivity()
         }
+
+        composable("profilinformation" ){
+            ProfilInformationenScreen()
+        }
+
     }
 
 }

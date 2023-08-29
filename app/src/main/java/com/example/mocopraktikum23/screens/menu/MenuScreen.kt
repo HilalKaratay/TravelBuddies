@@ -42,7 +42,7 @@ import com.example.mocopraktikum23.screens.login.HeadingTextComponent
 @Composable
 fun MenuScreen() {
 
-            Column(modifier = Modifier.padding(10.dp)) {
+            Row(modifier = Modifier.padding(10.dp)) {
                 HeadingTextComponent(value = "Meine Freundesliste")
                 Spacer(modifier = Modifier.height(40.dp))
                 friendslist("Lara Fischer")

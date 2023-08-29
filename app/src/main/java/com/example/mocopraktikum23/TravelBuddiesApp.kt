@@ -27,6 +27,7 @@ import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.screens.MenuScreen
 import com.example.mocopraktikum23.screens.ProfilScreen
 import com.example.mocopraktikum23.screens.login.LoginScreen
+import com.example.mocopraktikum23.screens.profil.ProfilInformationenScreen
 import com.example.mocopraktikum23.screens.registrieren.RegistrierenScreen
 import com.example.mocopraktikum23.ui.theme.MocoPraktikum23Theme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -50,8 +51,8 @@ fun TravelBuddiesApp() {
                             RegistrierenScreen()
                         }
 
-                        is ScreensNavigations.MenuScreen -> {
-                            MenuScreen()
+                        is ScreensNavigations.ProfilInformationenScreen -> {
+                            ProfilInformationenScreen()
                         }
 
                         is ScreensNavigations.LoginScreen -> {

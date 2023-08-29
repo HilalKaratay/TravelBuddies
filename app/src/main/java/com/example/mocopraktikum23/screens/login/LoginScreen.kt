@@ -92,7 +92,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
           onButtonClicked = {
             loginViewModel.onEvent(LoginUiEvent.LoginButtonClicked)
             PostOfficeAppRouter.navigateTo(ScreensNavigations.MenuScreen)
-            //onLoginButtonClicked()
           },
           isEnabled = loginViewModel.allValidationsPassed.value
         )
@@ -102,7 +101,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 
         ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
           PostOfficeAppRouter.navigateTo(ScreensNavigations.RegistrierenScreen)
-         // onRegistrierenButtonClicked()
         })
       }
     }
@@ -352,7 +350,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 
   @Composable
   fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (String) -> Unit) {
-    val loginText = if (tryingToLogin) "Einloggen" else "Registrieren"
+    val loginText = if (tryingToLogin) "Du hast bereits ein Konto? Einloggen" else "Hier klicken zum Registrieren"
     val annotatedString = buildAnnotatedString {
       withStyle(style = SpanStyle(color = Color.Black)) {
         pushStringAnnotation(tag = loginText, annotation = loginText)

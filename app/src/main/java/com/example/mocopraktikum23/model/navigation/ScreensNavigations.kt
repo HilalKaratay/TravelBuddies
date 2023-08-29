@@ -3,6 +3,7 @@ package com.example.mocopraktikum23.model.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Menu
@@ -20,7 +21,9 @@ sealed class ScreensNavigations(val route: String, var icon: ImageVector, var na
     object MapScreen : ScreensNavigations("map", Icons.Default.Map,"Map")
     object MenuScreen : ScreensNavigations("menu", Icons.Default.Menu,"Menu")
     object MapsActivity: ScreensNavigations("mapsActivity",Icons.Default.Create,"MapsActivity")
+    object ProfilInformationenScreen: ScreensNavigations("profilinformationen", Icons.Default.Check,"ProfilInformationen")
 }
+
 
 object PostOfficeAppRouter {
 
