@@ -86,6 +86,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'androidx.test:monitor:1.6.1'
     testImplementation 'junit:junit:4.13.2'
 
     debugImplementation 'androidx.compose.ui:ui-tooling'

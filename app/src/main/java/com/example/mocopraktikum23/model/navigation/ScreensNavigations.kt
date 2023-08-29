@@ -19,6 +19,7 @@ sealed class ScreensNavigations(val route: String, var icon: ImageVector, var na
     object MenuScreen : ScreensNavigations("menu", Icons.Default.Menu,"Menu")
     object MapsActivity: ScreensNavigations("mapsActivity",Icons.Default.Create,"MapsActivity")
     object ProfilInformationenScreen: ScreensNavigations("profilinformationen", Icons.Default.Check,"ProfilInformationen")
+    object OtherUserProfile: ScreensNavigations("otherUser",Icons.Default.Check,"OtherUser")
 }
 
 object AppRouter {

@@ -6,16 +6,20 @@ import androidx.lifecycle.ViewModel
 import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.model.service.ValidierungInformationen
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class ProfilInfoViewModel :ViewModel() {
 
-    private val _signedInUser = MutableStateFlow<FirebaseUser?>(null)
+    val db =Firebase.firestore
+    val _signedInUser = MutableStateFlow<FirebaseUser?>(null)
+    val signedInUser = _signedInUser.asStateFlow()
     var allValidationsPassed = mutableStateOf(false)
     var profilInfoUiState = mutableStateOf(ProfilInfoUiState())
     var speichernProgress = mutableStateOf(false)
@@ -125,15 +129,48 @@ class ProfilInfoViewModel :ViewModel() {
 
         Log.d(TAG, "Inside_SaveDATA")
         printState()
+        //Cloud Store!!!
+       /* val userdata= hashMapOf(
+            "name" to name,
+            "wohnort" to wohnort,
+            "geseheneOrte" to geseheneOrte,
+            "reiseZiele" to reiseZiele
+        )
+       db.collection("User").add(userdata)*/
+        _signedInUser.value = FirebaseAuth.getInstance().currentUser
+        val user =_signedInUser.value
+        user?.run {
+            val userIdReference = Firebase.database.reference
+                .child("User").child(uid)
+            val userData = ProfilInfoUiState(name, wohnort,geseheneOrte,reiseZiele)
+            userIdReference.setValue(userData)
+        }
+
+
+        //FIRESTORE REALTIME DATABASE
+       /* user?.run {
+            val userData = ProfilInfoUiState(name, wohnort,geseheneOrte,reiseZiele)
+            databaseReference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    databaseReference.setValue(userData)
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    println("Schiefgelaufen")
+                }
+            })
+        }
+*/
+
+    /*
         val userData = ProfilInfoUiState(name, wohnort,geseheneOrte,reiseZiele)
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 databaseReference.setValue(userData)
             }
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
-        })
+        })*/
     }
     private fun printState() {
         Log.d(TAG, "Inside_printState")

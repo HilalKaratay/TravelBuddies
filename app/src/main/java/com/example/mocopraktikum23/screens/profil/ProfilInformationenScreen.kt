@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.R
 import com.example.mocopraktikum23.model.navigation.AppRouter
@@ -52,8 +53,9 @@ fun ProfilInformationenScreen(profilInfoViewModel: ProfilInfoViewModel= viewMode
                 Text(
                     text = "Profilinformationen bearbeiten",
                     modifier = Modifier.padding(10.dp),
-                    fontWeight = FontWeight.ExtraBold
-                )
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize= 15.sp
+                    )
 
                 MyTextFieldComponent(
                     labelValue = "Name",

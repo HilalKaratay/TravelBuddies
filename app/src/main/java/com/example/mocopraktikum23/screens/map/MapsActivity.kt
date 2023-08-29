@@ -1,6 +1,7 @@
-package com.example.mocopraktikum23
+package com.example.mocopraktikum23.screens.map
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.mocopraktikum23.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

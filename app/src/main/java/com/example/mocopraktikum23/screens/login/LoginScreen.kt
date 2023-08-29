@@ -81,10 +81,10 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
           errorStatus = loginViewModel.loginUIState.value.passwordError
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         UnderLinedTextComponent(value = "Passwort vergessen?")
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         ButtonComponent(
           value = "Einloggen",
@@ -95,7 +95,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
           isEnabled = loginViewModel.allValidationsPassed.value
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
 
         ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
@@ -110,21 +110,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
   }
 }
 
-  @Composable
-  fun NormalTextComponent(value: String) {
-    Text(
-      text = value,
-      modifier = Modifier
-        .fillMaxWidth()
-        .heightIn(min = 40.dp),
-      style = TextStyle(
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Normal,
-        fontStyle = FontStyle.Normal
-      ), color = Color.Black,
-      textAlign = TextAlign.Center
-    )
-  }
+
 
   @Composable
   fun HeadingTextComponent(value: String) {
@@ -352,7 +338,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
         .fillMaxWidth()
         .heightIn(min = 40.dp),
       style = TextStyle(
-        fontSize = 21.sp,
+        fontSize = 17.sp,
         fontWeight = FontWeight.Normal,
         fontStyle = FontStyle.Normal,
         textAlign = TextAlign.Center

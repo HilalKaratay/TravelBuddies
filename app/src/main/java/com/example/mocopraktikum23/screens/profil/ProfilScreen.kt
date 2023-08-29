@@ -1,6 +1,5 @@
 package com.example.mocopraktikum23.screens
 
-import android.widget.Button
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -34,13 +33,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -50,8 +47,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mocopraktikum23.screens.profil.ProfilViewModel
 
 
@@ -61,7 +56,7 @@ fun ProfilScreen() {
     val viewModel: ProfilViewModel = ProfilViewModel()
 
     var showSignIn by remember {mutableStateOf(true)}
-   // viewModel.readFromDatabase()
+    viewModel.readFromDatabase()
     viewModel.differentReadFromDatabase()
 
     val signedInUser by viewModel.signedInUser.collectAsState()
@@ -69,12 +64,11 @@ fun ProfilScreen() {
     val newDataFromDB by viewModel.newDataFromDB.collectAsState()
 
 
-
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
-            name = "TravelBuddies Profil",
-            modifier = Modifier.padding(10.dp)
-        )
+            name = "Profil von ${userDataFromDB?.name}",
+            modifier = Modifier.padding(10.dp))
+
         Spacer(modifier = Modifier.height(4.dp))
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
@@ -84,7 +78,6 @@ fun ProfilScreen() {
                     .padding(horizontal = 20.dp)
             ) {
                 RoundImage(
-
                     image = painterResource(id = R.drawable.profilpng),
                     modifier = Modifier
                         .size(100.dp)
@@ -99,15 +92,22 @@ fun ProfilScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ){
-            Text("${signedInUser}"+"${newDataFromDB?.name}")
-            Text("${newDataFromDB?.wohnort}")
-            Text("${newDataFromDB?.geseheneOrte}")
-            Text("${newDataFromDB?.reiseZiele}")
+            Text("${userDataFromDB?.name}")
+            Text("${userDataFromDB?.wohnort}")
+            Text("${userDataFromDB?.geseheneOrte}")
+            Text("${userDataFromDB?.reiseZiele}")
 
         }
         Spacer(modifier = Modifier.height(25.dp))
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
+        Row(horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .border(
+                    width = 1.dp,
+                    color = Color.LightGray,
+                    shape = RoundedCornerShape(5.dp)
+                )
+                .padding(6.dp)
         ) {
             ActionButton(
                 text = "Freundschaftsanfrage",
@@ -154,12 +154,6 @@ fun ProfilScreen() {
             modifier = modifier
                 .fillMaxWidth()
         ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back",
-                tint = Color.Black,
-                modifier = Modifier.size(24.dp)
-            )
             Text(
                 text = name,
                 overflow = TextOverflow.Ellipsis,
@@ -174,11 +168,14 @@ fun ProfilScreen() {
         modifier: Modifier = Modifier
     ) {
         Column(modifier = modifier.fillMaxWidth()) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
+            Row(verticalAlignment = Alignment.CenterVertically,
+                modifier = modifier
+                    .border(
+                        width = 1.dp,
+                        color = Color.LightGray,
+                        shape = RoundedCornerShape(5.dp)
+                    )
+                    .padding(6.dp)
             ) {
                 RoundImage(
                     image = painterResource(id = R.drawable.profilpng),
@@ -216,28 +213,7 @@ fun ProfilScreen() {
         )
     }
 
-    @Composable
-    fun ProfileStat(
-        numberText: String,
-        text: String,
-        modifier: Modifier = Modifier
-    ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
-        ) {
-            Text(
-                text = numberText,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = text)
-        }
-    }
-
-    @Composable
+     @Composable
     fun ProfileDescription(
         displayName: String,
         geseheneOrte: String,
@@ -250,11 +226,6 @@ fun ProfilScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            /*
-                text = displayName,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = letterSpacing,
-                lineHeight = lineHeight*/
 
             Text(
                 text = geseheneOrte,
@@ -268,15 +239,6 @@ fun ProfilScreen() {
                 lineHeight = lineHeight
             )
         }
-    }
-
-    @Composable
-    fun ButtonSection(
-        modifier: Modifier = Modifier
-    ) {
-        val minWidth = 90.dp
-        val height = 30.dp
-
     }
 
     @Composable

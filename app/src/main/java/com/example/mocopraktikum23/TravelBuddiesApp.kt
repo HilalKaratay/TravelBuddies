@@ -2,12 +2,16 @@
 package com.example.mocopraktikum23
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -16,8 +20,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mocopraktikum23.model.navigation.NavigationGraph
 import com.example.mocopraktikum23.model.navigation.AppRouter
 import com.example.mocopraktikum23.model.navigation.ScreensNavigations
-import com.example.mocopraktikum23.screens.MenuScreen
-import com.example.mocopraktikum23.screens.ProfilScreen
 import com.example.mocopraktikum23.screens.login.LoginScreen
 import com.example.mocopraktikum23.screens.profil.ProfilInformationenScreen
 import com.example.mocopraktikum23.screens.registrieren.RegistrierenScreen
@@ -31,10 +33,10 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 fun TravelBuddiesApp() {
     MocoPraktikum23Theme {
         Surface(color = MaterialTheme.colors.background) {
-
             val navController = rememberNavController()
+            val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
             Scaffold(
-                bottomBar = { BottomBar(navController = navController) }
+               bottomBar = { BottomBar(navController = navController,bottomBarState) }
             ) {
                 Crossfade(targetState = AppRouter.currentScreen) { currentState ->
                     when (currentState.value) {
@@ -68,16 +70,50 @@ fun TravelBuddiesApp() {
 }
 
         @Composable
-        fun BottomBar(navController: NavHostController) {
+        fun BottomBar(navController: NavHostController,bottombarState: MutableState<Boolean>) {
             val items = listOf(
                 ScreensNavigations.ProfilScreen,
                 ScreensNavigations.MapScreen,
                 ScreensNavigations.MenuScreen
-                )
+            )
+            AnimatedVisibility(visible = bottombarState.value) {
             BottomNavigation {
-
+                val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentState = navBackStackEntry?.destination?.route
+
+                when (navBackStackEntry?.destination?.route) {
+                    "menu" -> {
+                        // Show BottomBar and TopBar
+                        bottomBarState.value = true
+                    }
+
+                    "profil" -> {
+                        // Show BottomBar and TopBar
+                        bottomBarState.value = true
+                    }
+
+                    "map" -> {
+                        // Show BottomBar and TopBar
+                        bottomBarState.value = true
+                    }
+
+                    "profilinformationen" -> {
+                        // Show BottomBar and TopBar
+                        bottomBarState.value = false
+                    }
+
+                    "registrieren" -> {
+                        // Show BottomBar and TopBar
+                        bottomBarState.value = false
+                    }
+
+                    "login" -> {
+                        // Show BottomBar and TopBar
+                        bottomBarState.value = false
+                    }
+                }
+
                 items.forEach { item ->
                     BottomNavigationItem(
                         icon = {
@@ -111,5 +147,7 @@ fun TravelBuddiesApp() {
                 }
             }
         }
+        }
+
 
 
