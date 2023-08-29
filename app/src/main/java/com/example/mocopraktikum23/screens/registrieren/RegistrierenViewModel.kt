@@ -5,11 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.mocopraktikum23.model.service.Validierung
 import com.google.firebase.auth.FirebaseAuth
-class RegistrierenViewModel(): ViewModel() {
+class RegistrierenViewModel: ViewModel() {
 
     private val TAG = RegistrierenViewModel::class.simpleName
 
-    var RegistrierenUiState = mutableStateOf(RegistrierenUiState())
+    var registrierenUiState = mutableStateOf(RegistrierenUiState())
 
     var allValidationsPassed = mutableStateOf(false)
 
@@ -18,14 +18,14 @@ class RegistrierenViewModel(): ViewModel() {
     fun onEvent(event: RegistrierenUiEvent) {
         when (event) {
             is RegistrierenUiEvent.FirstNameChanged -> {
-                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                registrierenUiState.value = registrierenUiState.value.copy(
                     vorname = event.vorname
                 )
                 printState()
             }
 
             is RegistrierenUiEvent.EmailChanged -> {
-                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                registrierenUiState.value = registrierenUiState.value.copy(
                     email = event.email
                 )
                 printState()
@@ -34,7 +34,7 @@ class RegistrierenViewModel(): ViewModel() {
 
 
             is RegistrierenUiEvent.PasswortChanged -> {
-                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                registrierenUiState.value = registrierenUiState.value.copy(
                     passwort = event.passwort
                 )
                 printState()
@@ -45,7 +45,7 @@ class RegistrierenViewModel(): ViewModel() {
             }
 
             is RegistrierenUiEvent.PrivacyPolicyCheckBoxClicked -> {
-                RegistrierenUiState.value = RegistrierenUiState.value.copy(
+                registrierenUiState.value = registrierenUiState.value.copy(
                     privacyPolicyAccepted = event.status
                 )
             }
@@ -61,21 +61,21 @@ class RegistrierenViewModel(): ViewModel() {
         Log.d(TAG, "Inside_signUp")
         printState()
         createUserInFirebase(
-            email = RegistrierenUiState.value.email,
-            password = RegistrierenUiState.value.passwort)
+            email = registrierenUiState.value.email,
+            password = registrierenUiState.value.passwort)
     }
 
     private fun validateDataWithRules() {
         val nameResult = Validierung.validateName(
-            name = RegistrierenUiState.value.vorname
+            name = registrierenUiState.value.vorname
         )
 
         val emailResult = Validierung.validateEmail(
-            email = RegistrierenUiState.value.email
+            email = registrierenUiState.value.email
         )
 
         val passwortResult = Validierung.validatePasswort(
-            passwort = RegistrierenUiState.value.passwort
+            passwort = registrierenUiState.value.passwort
         )
 
 
@@ -85,7 +85,7 @@ class RegistrierenViewModel(): ViewModel() {
         Log.d(TAG, "passwordResult= $passwortResult")
 
 
-        RegistrierenUiState.value = RegistrierenUiState.value.copy(
+        registrierenUiState.value = registrierenUiState.value.copy(
             vornameError = nameResult.status,
             emailError = emailResult.status,
             passwortError = passwortResult.status,
@@ -101,7 +101,7 @@ class RegistrierenViewModel(): ViewModel() {
 
     private fun printState() {
         Log.d(TAG, "Inside_printState")
-        Log.d(TAG, RegistrierenUiState.value.toString())
+        Log.d(TAG, registrierenUiState.value.toString())
     }
 
 

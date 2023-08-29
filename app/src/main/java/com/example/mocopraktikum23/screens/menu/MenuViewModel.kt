@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MenuViewModel(): ViewModel() {
 
-
     val isUserLoggedIn: MutableLiveData<Boolean> = MutableLiveData()
 
     fun logout() {
@@ -30,9 +29,7 @@ class MenuViewModel(): ViewModel() {
                 Log.d(TAG, "Inside sign out is not complete")
             }
         }
-
         firebaseAuth.addAuthStateListener(authStateListener)
-
     }
 
     fun checkForActiveSession() {
@@ -44,7 +41,6 @@ class MenuViewModel(): ViewModel() {
             isUserLoggedIn.value = false
         }
     }
-
 
     val emailId: MutableLiveData<String> = MutableLiveData()
 

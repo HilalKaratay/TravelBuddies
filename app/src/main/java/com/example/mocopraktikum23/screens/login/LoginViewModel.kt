@@ -15,7 +15,6 @@ class LoginViewModel : ViewModel() {
   var allValidationsPassed = mutableStateOf(false)
   var loginInProgress = mutableStateOf(false)
 
-
   fun onEvent(event: LoginUiEvent) {
     when (event) {
       is LoginUiEvent.EmailChanged -> {

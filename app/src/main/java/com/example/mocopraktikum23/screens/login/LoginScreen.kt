@@ -180,7 +180,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
     )
   }
 
-
   @Composable
   fun PasswordTextFieldComponent(
     labelValue: String, painterResource: Painter,
@@ -230,12 +229,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
           Icons.Filled.Visibility
         } else {
           Icons.Filled.VisibilityOff
-        }
-
-        val description = if (passwordVisible.value) {
-          Text(text = " ")
-        } else {
-          Text(text = " ")
         }
 
         IconButton(onClick = { passwordVisible.value = !passwordVisible.value }) {
@@ -309,7 +302,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 
     })
   }
-
   @Composable
   fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boolean = false) {
     Button(
@@ -345,8 +337,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 
     }
   }
-
-
 
   @Composable
   fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (String) -> Unit) {
@@ -400,10 +390,3 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
       textDecoration = TextDecoration.Underline
     )
   }
-
-
-@Preview
-@Composable
-fun LoginScreenPreview() {
-  LoginScreen()
-}

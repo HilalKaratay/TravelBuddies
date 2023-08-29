@@ -1,6 +1,5 @@
 package com.example.mocopraktikum23
 
-
 import android.content.res.Resources
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Stable

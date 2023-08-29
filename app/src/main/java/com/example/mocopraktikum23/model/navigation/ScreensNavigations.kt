@@ -2,7 +2,6 @@ package com.example.mocopraktikum23.model.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Map
@@ -11,8 +10,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import com.example.mocopraktikum23.R
-
 
 sealed class ScreensNavigations(val route: String, var icon: ImageVector, var name: String) {
     object RegistrierenScreen : ScreensNavigations("registrieren", Icons.Default.Add,"registrieren")
@@ -23,7 +20,6 @@ sealed class ScreensNavigations(val route: String, var icon: ImageVector, var na
     object MapsActivity: ScreensNavigations("mapsActivity",Icons.Default.Create,"MapsActivity")
     object ProfilInformationenScreen: ScreensNavigations("profilinformationen", Icons.Default.Check,"ProfilInformationen")
 }
-
 
 object PostOfficeAppRouter {
 

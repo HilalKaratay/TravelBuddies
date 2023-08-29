@@ -5,7 +5,6 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.mutableStateOf
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 @ExperimentalMaterialApi
 class TravelBuddiesActivity : AppCompatActivity() {

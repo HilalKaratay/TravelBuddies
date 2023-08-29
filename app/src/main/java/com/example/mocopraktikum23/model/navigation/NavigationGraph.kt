@@ -66,7 +66,5 @@ fun NavigationGraph(navController: NavHostController) {
         composable("profilinformation" ){
             ProfilInformationenScreen()
         }
-
     }
-
 }

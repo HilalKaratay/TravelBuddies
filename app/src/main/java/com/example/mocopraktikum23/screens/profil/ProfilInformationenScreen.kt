@@ -71,7 +71,6 @@ fun ProfilInformationenScreen(profilInfoViewModel: ProfilInfoViewModel= viewMode
                         profilInfoViewModel.onEvent(ProfilInfoUiEvent.NameChanged(it))
                     },
                     errorStatus = profilInfoViewModel.profilInfoUiState.value.nameError
-
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -86,7 +85,6 @@ fun ProfilInformationenScreen(profilInfoViewModel: ProfilInfoViewModel= viewMode
 
                 )
 
-                // on below line we are adding spacer
                 Spacer(modifier = Modifier.height(10.dp))
 
                 MyTextFieldComponent(

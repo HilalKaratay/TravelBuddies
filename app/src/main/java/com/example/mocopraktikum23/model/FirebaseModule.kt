@@ -12,9 +12,6 @@ import dagger.Provides
 object FirebaseModule{
     @Provides
     fun firestore():FirebaseFirestore = Firebase.firestore
-
-
     @Provides
      fun auth(): FirebaseAuth = Firebase.auth
-
 }

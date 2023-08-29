@@ -18,13 +18,11 @@ import com.example.mocopraktikum23.screens.login.ButtonComponent
 import com.example.mocopraktikum23.screens.login.ClickableLoginTextComponent
 import com.example.mocopraktikum23.screens.login.HeadingTextComponent
 import com.example.mocopraktikum23.screens.login.MyTextFieldComponent
-import com.example.mocopraktikum23.screens.login.NormalTextComponent
 import com.example.mocopraktikum23.screens.login.PasswordTextFieldComponent
 import com.example.mocopraktikum23.screens.registrieren.RegistrierenUiEvent.RegisterButtonClicked
 
 @Composable
 fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel()) {
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -47,7 +45,7 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                     onTextChanged = {
                         registrierenViewModel.onEvent(RegistrierenUiEvent.FirstNameChanged(it))
                     },
-                    errorStatus = registrierenViewModel.RegistrierenUiState.value.vornameError
+                    errorStatus = registrierenViewModel.registrierenUiState.value.vornameError
                 )
 
 
@@ -57,7 +55,7 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                     onTextChanged = {
                         registrierenViewModel.onEvent(RegistrierenUiEvent.EmailChanged(it))
                     },
-                    errorStatus = registrierenViewModel.RegistrierenUiState.value.emailError
+                    errorStatus = registrierenViewModel.registrierenUiState.value.emailError
                 )
 
                 PasswordTextFieldComponent(
@@ -66,26 +64,8 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                     onTextSelected = {
                         registrierenViewModel.onEvent(RegistrierenUiEvent.PasswortChanged(it))
                     },
-                    errorStatus = registrierenViewModel.RegistrierenUiState.value.passwortError
+                    errorStatus = registrierenViewModel.registrierenUiState.value.passwortError
                 )
-
-                /*
-                MyTextFieldComponent(
-                    labelValue ="ReiseZiele",
-                    painterResource = painterResource(id = drawable.map_icon),
-                    onTextChanged = { registrierenViewModel.onEvent(RegistrierenUiEvent.ReiseZieleChanged(it))
-                    },
-                    errorStatus = registrierenViewModel.RegistrierenUiState.value.reiseZieleError
-                )
-                MyTextFieldComponent(
-                    labelValue ="GeseheneOrte",
-                    painterResource = painterResource(id = drawable.map_icon),
-                    onTextChanged = { registrierenViewModel.onEvent(RegistrierenUiEvent.GeseheneOrteChanged(it))
-                    },
-                    errorStatus = registrierenViewModel.RegistrierenUiState.value.geseheneOrteError
-                )*/
-
-
                 Spacer(modifier = Modifier.height(40.dp))
 
                 ButtonComponent(
@@ -94,10 +74,7 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                         registrierenViewModel.onEvent(RegisterButtonClicked)
                         PostOfficeAppRouter.navigateTo(ScreensNavigations.ProfilInformationenScreen)
                     },
-                    //onRegistrierenButtonClicked()},
                     isEnabled = registrierenViewModel.allValidationsPassed.value,
-
-
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -107,7 +84,6 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
                         PostOfficeAppRouter.navigateTo(ScreensNavigations.LoginScreen)
                     }
                 )
-                //onEinloggenButtonClicked()
             }
         }
 
@@ -115,5 +91,4 @@ fun RegistrierenScreen(registrierenViewModel: RegistrierenViewModel = viewModel(
             CircularProgressIndicator()
         }
     }
-
 }

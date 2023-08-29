@@ -51,9 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProfilScreen(
-    modifier: Modifier = Modifier,
-) { Column(modifier = Modifier.fillMaxSize()) {
+fun ProfilScreen(){ Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
                         name = "TravelBuddies Profil",
                         modifier = Modifier

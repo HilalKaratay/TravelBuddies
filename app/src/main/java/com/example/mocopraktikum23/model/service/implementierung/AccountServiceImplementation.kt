@@ -12,9 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
-
 class AccountServiceImplementation @Inject constructor(private val auth: FirebaseAuth) : AccountService {
-
   override val currentUserId: String
     get() = auth.currentUser?.uid.orEmpty()
 
@@ -58,8 +56,6 @@ class AccountServiceImplementation @Inject constructor(private val auth: Firebas
       auth.currentUser!!.delete()
     }
     auth.signOut()
-
-    // Sign the user back in anonymously.
     createAnonymousAccount()
   }
 
