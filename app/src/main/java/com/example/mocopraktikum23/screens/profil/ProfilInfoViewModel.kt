@@ -8,7 +8,10 @@ import com.example.mocopraktikum23.model.navigation.ScreensNavigations
 import com.example.mocopraktikum23.model.service.ValidierungInformationen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -23,8 +26,8 @@ class ProfilInfoViewModel :ViewModel() {
     var allValidationsPassed = mutableStateOf(false)
     var profilInfoUiState = mutableStateOf(ProfilInfoUiState())
     var speichernProgress = mutableStateOf(false)
-    val firebaseDatabase = FirebaseDatabase.getInstance("https://moco-30a5f-default-rtdb.europe-west1.firebasedatabase.app/")
-    val databaseReference = firebaseDatabase.getReference("User").push()
+    val firebaseDatabase = FirebaseDatabase.getInstance("https://moco-30a5f-default-rtdb.europe-west1.firebasedatabase.app")
+    val databaseReference = firebaseDatabase.getReference("Users").push()
 
 
     private val TAG = ProfilInfoViewModel::class.simpleName
@@ -61,6 +64,7 @@ class ProfilInfoViewModel :ViewModel() {
 
             is ProfilInfoUiEvent.SpeichernButtonClicked -> {
                 speichern()
+                speichern1()
                 AppRouter.navigateTo(ScreensNavigations.MenuScreen)
             }
         }
@@ -147,8 +151,7 @@ class ProfilInfoViewModel :ViewModel() {
         }
 
 
-        //FIRESTORE REALTIME DATABASE
-       /* user?.run {
+        /*
             val userData = ProfilInfoUiState(name, wohnort,geseheneOrte,reiseZiele)
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -157,9 +160,9 @@ class ProfilInfoViewModel :ViewModel() {
                 override fun onCancelled(error: DatabaseError) {
                     println("Schiefgelaufen")
                 }
-            })
-        }
-*/
+            })*/
+
+
 
     /*
         val userData = ProfilInfoUiState(name, wohnort,geseheneOrte,reiseZiele)
@@ -172,6 +175,29 @@ class ProfilInfoViewModel :ViewModel() {
             }
         })*/
     }
+
+
+    fun speichern1() {
+        speichernProgress.value = true
+        val name = profilInfoUiState.value.name
+        val wohnort = profilInfoUiState.value.wohnort
+        val geseheneOrte = profilInfoUiState.value.geseheneOrte
+        val reiseZiele = profilInfoUiState.value.reiseZiele
+
+        Log.d(TAG, "Inside_SaveDATA")
+        printState()
+        val userData = ProfilInfoUiState(name, wohnort,geseheneOrte,reiseZiele)
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                databaseReference.setValue(userData)
+            }
+            override fun onCancelled(error: DatabaseError) {
+               println("Hallo Fehler")
+            }
+        })
+    }
+
+
     private fun printState() {
         Log.d(TAG, "Inside_printState")
         Log.d(TAG, profilInfoUiState.value.toString())

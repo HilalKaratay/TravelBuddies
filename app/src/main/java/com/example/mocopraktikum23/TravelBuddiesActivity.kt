@@ -14,7 +14,6 @@ import com.google.android.gms.location.LocationServices
 
 @ExperimentalMaterialApi
 class TravelBuddiesActivity : AppCompatActivity() {
-
     val viewModel: TravelBuddiesViewModel = TravelBuddiesViewModel()
    //Für die Map implemenation - acress auf standort
 
